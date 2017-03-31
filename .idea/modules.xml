@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/notesSqlLiteHibernateJSF.iml" filepath="$PROJECT_DIR$/notesSqlLiteHibernateJSF.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notesSqlLiteHibernateJSF-domain/notesSqlLiteHibernateJSF-domain.iml" filepath="$PROJECT_DIR$/notesSqlLiteHibernateJSF-domain/notesSqlLiteHibernateJSF-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notesSqlLiteHibernateJSF-service/notesSqlLiteHibernateJSF-service.iml" filepath="$PROJECT_DIR$/notesSqlLiteHibernateJSF-service/notesSqlLiteHibernateJSF-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notesSqlLiteHibernateJSF-web/notesSqlLiteHibernateJSF-web.iml" filepath="$PROJECT_DIR$/notesSqlLiteHibernateJSF-web/notesSqlLiteHibernateJSF-web.iml" />
+    </modules>
+  </component>
+</project>

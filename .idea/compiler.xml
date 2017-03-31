@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="notesSqlLiteHibernateJSF" />
+        <module name="notesSqlLiteHibernateJSF-domain" />
+        <module name="notesSqlLiteHibernateJSF-service" />
+        <module name="notesSqlLiteHibernateJSF-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="notesSqlLiteHibernateJSF" target="1.8" />
+      <module name="notesSqlLiteHibernateJSF-domain" target="1.8" />
+      <module name="notesSqlLiteHibernateJSF-service" target="1.8" />
+      <module name="notesSqlLiteHibernateJSF-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

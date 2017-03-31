@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="notesSqlLiteHibernateJSF-web:war">
+    <output-path>$PROJECT_DIR$/notesSqlLiteHibernateJSF-web/target</output-path>
+    <root id="archive" name="notesSqlLiteHibernateJSF-web.war">
+      <element id="artifact" artifact-name="notesSqlLiteHibernateJSF-web:war exploded" />
+    </root>
+  </artifact>
+</component>
