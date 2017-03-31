@@ -16,7 +16,7 @@ import java.util.Set;
 public class DEBUG {
     public static void main(String[] args) {
         Session session=HibernateUtil.getSessionFactory().openSession();
-        session.createCriteria(User.class).list().forEach(System.out::println);
+        session.createCriteria(User.class).list().forEach(a->((User)a).getNotes().forEach(System.out::println));
 //        Set<User> userSet = new HashSet<>();
 //        Connection conn = null;
 //        PreparedStatement preparedStatement = null;

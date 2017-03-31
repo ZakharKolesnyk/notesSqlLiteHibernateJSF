@@ -8,12 +8,11 @@
     </schema>
     <table id="3" parent="2" name="notes"/>
     <table id="4" parent="2" name="sqlite_sequence"/>
-    <table id="5" parent="2" name="user"/>
-    <column id="6" parent="3" name="id_notes">
-      <DataType>INTEGER(0,-1)|4</DataType>
-      <NotNull>1</NotNull>
+    <table id="5" parent="2" name="users"/>
+    <column id="6" parent="3" name="id_user">
+      <DataType>INGTEGER(0,-1)|12</DataType>
     </column>
-    <column id="7" parent="3" name="id_user">
+    <column id="7" parent="3" name="id_note">
       <Position>1</Position>
       <DataType>INTEGER(0,-1)|4</DataType>
       <NotNull>1</NotNull>
@@ -41,7 +40,7 @@
       <DataType>TEXT(0,-1)|12</DataType>
     </column>
     <key id="13" parent="3">
-      <ColNames>id_notes</ColNames>
+      <ColNames>id_note</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="14" parent="3" name="#FAKE_notes_1">
@@ -49,7 +48,7 @@
       <ColNames>id_user</ColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
-      <RefTableName>user</RefTableName>
+      <RefTableName>users</RefTableName>
       <RefColNames>id_user</RefColNames>
       <OnDelete>no-action</OnDelete>
       <OnUpdate>no-action</OnUpdate>

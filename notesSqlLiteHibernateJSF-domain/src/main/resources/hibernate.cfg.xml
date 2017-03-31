@@ -16,6 +16,6 @@
         <!--<property name="hibernate.hbm2ddl.auto">update</property>-->
 
         <mapping class="com.gmail.kolesnyk.zakhar.user.User"/>
-        <!--<mapping class="com.gmail.kolesnyk.zakhar.notes.Notes"/>-->
+        <mapping class="com.gmail.kolesnyk.zakhar.notes.Note"/>
     </session-factory>
 </hibernate-configuration>

@@ -1,12 +1,15 @@
 package com.gmail.kolesnyk.zakhar.user;
 
 
+import com.gmail.kolesnyk.zakhar.notes.Note;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity()
-@Table(name ="user")
-public class User implements Serializable{
+@Table(name = "users")
+public class User implements Serializable {
 
     @Id
     @GeneratedValue
@@ -28,6 +31,9 @@ public class User implements Serializable{
     @Column(name = "pass")
     private String pass;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Note> notes;
+
     public User() {
     }
 
@@ -38,6 +44,14 @@ public class User implements Serializable{
         this.email = email;
         this.login = login;
         this.pass = pass;
+    }
+
+    public Set<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Set<Note> notes) {
+        this.notes = notes;
     }
 
     public int getIdUser() {

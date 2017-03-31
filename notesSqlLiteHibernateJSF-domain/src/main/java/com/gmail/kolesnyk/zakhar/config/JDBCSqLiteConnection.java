@@ -13,7 +13,7 @@ public class JDBCSqLiteConnection {
     public Connection getConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:${basedir}/db/notes_db.sqlite");
+            connection = DriverManager.getConnection("jdbc:sqlite:${basedir}/src/main/resources/db/notes_db.sqlite");
             return connection;
         } catch (Exception e) {
             e.printStackTrace();
