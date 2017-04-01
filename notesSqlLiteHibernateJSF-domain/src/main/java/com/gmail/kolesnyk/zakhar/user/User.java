@@ -34,16 +34,28 @@ public class User implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Note> notes;
 
+    @Column(name = "authority")
+    private AUTHORITY authority;
+
     public User() {
     }
 
-    public User(int idUser, String firstName, String lastName, String email, String login, String pass) {
-        this.idUser = idUser;
+    public User(String firstName, String lastName, String email, String login, String pass, Set<Note> notes, AUTHORITY authority) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.login = login;
         this.pass = pass;
+        this.notes = notes;
+        this.authority = authority;
+    }
+
+    public AUTHORITY getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(AUTHORITY role) {
+        this.authority = role;
     }
 
     public Set<Note> getNotes() {
@@ -111,6 +123,8 @@ public class User implements Serializable {
                 ", email='" + email + '\'' +
                 ", login='" + login + '\'' +
                 ", pass='" + pass + '\'' +
+                ", notes=" + notes +
+                ", role=" + authority +
                 '}';
     }
 }

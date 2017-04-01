@@ -3,11 +3,11 @@ package com.gmail.kolesnyk.zakhar.config;
 import org.hibernate.Session;
 
 public class TransactionUtil {
-    public static Session session;
+    private static volatile Session session = HibernateUtil.getSessionFactory().openSession();
 
     public static void doTransaction(Transaction transaction) {
-        session = HibernateUtil.getSessionFactory().openSession();
-        session.getTransaction().begin();
+        initSession();
+//        session.getTransaction().begin();
         try {
             transaction.transact();
             session.getTransaction().commit();
@@ -15,8 +15,39 @@ public class TransactionUtil {
             session.getTransaction().rollback();
             throw e;
         } finally {
-            session.close();
+            if (session.isOpen()) {
+                session.close();
+            }
         }
+    }
+
+    public static Session getSession() {
+        initSession();
+        return session;
+    }
+
+    private static void initSession() {
+//        try {
+//            session = HibernateUtil.getSessionFactory().openSession();
+//        }catch (HibernateException e){
+//            session = HibernateUtil.getSessionFactory().getCurrentSession();
+//        }
+//        if (session.getTransaction().isActive()){
+//            session.getTransaction().rollback();
+//        }
+        if (HibernateUtil.getSessionFactory().isClosed()) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        } else {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        }
+        if (!session.getTransaction().isActive()) {
+            session.getTransaction().begin();
+        }
+
+    }
+
+    public static void setSession(Session session) {
+        TransactionUtil.session = session;
     }
 
     public interface Transaction {

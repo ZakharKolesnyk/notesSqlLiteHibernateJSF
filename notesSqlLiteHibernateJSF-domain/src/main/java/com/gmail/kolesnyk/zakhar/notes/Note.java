@@ -21,9 +21,6 @@ public class Note implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "done")
-    private boolean done;
-
     @Column(name = "done_date")
     private String doneDate;
 
@@ -34,15 +31,27 @@ public class Note implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User user;
 
+    @Column(name = "state")
+    private STATE state;
+
     public Note() {
     }
 
-    public Note(String name, String description, boolean done, String doneDate, String createDate) {
+    public Note(String name, String description, String doneDate, String createDate, User user, STATE state) {
         this.name = name;
         this.description = description;
-        this.done = done;
         this.doneDate = doneDate;
         this.createDate = createDate;
+        this.user = user;
+        this.state = state;
+    }
+
+    public STATE getState() {
+        return state;
+    }
+
+    public void setState(STATE state) {
+        this.state = state;
     }
 
     public User getUser() {
@@ -77,14 +86,6 @@ public class Note implements Serializable {
         this.description = description;
     }
 
-    public boolean isDone() {
-        return done;
-    }
-
-    public void setDone(boolean done) {
-        this.done = done;
-    }
-
     public String getDoneDate() {
         return doneDate;
     }
@@ -107,10 +108,10 @@ public class Note implements Serializable {
                 "id_note=" + id_note +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", done=" + done +
                 ", doneDate='" + doneDate + '\'' +
                 ", createDate='" + createDate + '\'' +
                 ", user=" + user.getIdUser() +
+                ", state=" + state +
                 '}';
     }
 }

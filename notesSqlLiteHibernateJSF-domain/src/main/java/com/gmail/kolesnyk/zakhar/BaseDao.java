@@ -11,7 +11,7 @@ public interface BaseDao<T, I> {
     /**
      * return entity by primary key in table
      */
-    T selectById(I id);
+    T byId(I id);
 
     /**
      * add new row with describe of entity in suited table
