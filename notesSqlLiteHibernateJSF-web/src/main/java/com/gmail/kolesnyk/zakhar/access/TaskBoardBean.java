@@ -7,24 +7,28 @@ import com.gmail.kolesnyk.zakhar.notes.STATE;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
 
-@ApplicationScoped
+@SessionScoped
 @ManagedBean
 public class TaskBoardBean implements Serializable {
     private final static int LENGTH_NAME_ON_PAGE = 25;
     private final STATE[] states = STATE.values();
 
+//    @ManagedProperty(value="#{viewNoteBean}")
+//    private ViewNoteBean viewNoteBean;
     private NoteService noteService;
     private List<Note> waitingNotes;
     private List<Note> performingNotes;
     private List<Note> doneNotes;
-
-    private Note detailedNote;
-
+//    private Note viewNote;
 
     public TaskBoardBean() {
         noteService = new NoteServiceImpl();
@@ -80,6 +84,20 @@ public class TaskBoardBean implements Serializable {
         return str;
     }
 
+    public String viewNote(Note note) {
+//        Note note = (Note) event.getComponent().getAttributes().get("note");
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("note", note);
+        System.out.println("VIEW FORWARD");
+//        viewNoteBean.setNote(note);
+        return "view_note";
+//        String uri = "view_note.jsf";
+//        try {
+//            FacesContext.getCurrentInstance().getExternalContext().dispatch(uri);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+    }
+
     public STATE[] getStates() {
         return states;
     }
@@ -120,15 +138,14 @@ public class TaskBoardBean implements Serializable {
         this.doneNotes = doneNotes;
     }
 
-    public void viewDetailsNote(Note note) {
-        this.detailedNote = note;
-    }
-
-    public Note getDetailedNote() {
-        return detailedNote;
-    }
-
-    public void setDetailedNote(Note detailedNote) {
-        this.detailedNote = detailedNote;
-    }
+//    public Note getViewNote() {
+//        return viewNote;
+//    }
+//
+//    public void setViewNote(Note viewNote) {
+//        this.viewNote = viewNote;
+//    }
+    //    public void setViewNoteBean(ViewNoteBean viewNoteBean) {
+//        this.viewNoteBean = viewNoteBean;
+//    }
 }

@@ -29,6 +29,36 @@
             <a class="navbar-brand" href="#">Task Board</a>
         </div>
     </nav>
+    <%--<div>--%>
+        <%--<h:form>--%>
+            <%--&lt;%&ndash;<h:dataTable>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<h:outputText id="detailed" value="#{taskBoardBean.detailedNote}"/>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<h:column>&ndash;%&gt;--%>
+                    <%--<h:outputText value="name"/>--%>
+                    <%--<h:inputText onchange="#{taskBoardBean.detailedNote.name}"/>--%>
+                <%--&lt;%&ndash;</h:column>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<h:column>&ndash;%&gt;--%>
+                    <%--<h:outputText value="description"/>--%>
+                    <%--<h:inputText onchange="#{taskBoardBean.detailedNote.description}"/>--%>
+                <%--&lt;%&ndash;</h:column>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<h:column>&ndash;%&gt;--%>
+                    <%--<h:outputText value="last modified"/>--%>
+                    <%--<h:inputText onchange="#{taskBoardBean.detailedNote.createDate.toString}"/>--%>
+                <%--&lt;%&ndash;</h:column>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<h:column>&ndash;%&gt;--%>
+                    <%--<h:outputText value="state"/>--%>
+                    <%--<h:inputText onchange="#{taskBoardBean.detailedNote.state.name}"/>--%>
+                <%--&lt;%&ndash;</h:column>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<h:column>&ndash;%&gt;--%>
+                    <%--<h:outputText value="responcible"/>--%>
+                    <%--<h:inputText onchange="#{taskBoardBean.detailedNote.user.login}"/>--%>
+                <%--&lt;%&ndash;</h:column>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<h:column>&ndash;%&gt;--%>
+                    <%--<h:commandButton value="apply"/>--%>
+                <%--&lt;%&ndash;</h:column>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;</h:dataTable>&ndash;%&gt;--%>
+        <%--</h:form>--%>
+    <%--</div>--%>
     <div class="container">
         <div class="row vertical-align"> <!--
                     ^--  Additional class -->
@@ -43,7 +73,8 @@
                             <h:dataTable var="note" value="#{taskBoardBean.waitingNotes}">
                                 <h:column>
                                     <h:commandLink styleClass="pull-left notes"
-                                                   value="#{taskBoardBean.cutString(note.name)}"/>
+                                                   value="#{taskBoardBean.cutString(note.name)}"
+                                                   action="#{taskBoardBean.viewNote(note)}"/>
                                 </h:column>
                                 <h:column>
                                     <h:commandLink styleClass="pull-left notes"
@@ -76,14 +107,18 @@
                             <h:dataTable var="note" value="#{taskBoardBean.performingNotes}">
                                 <h:column>
                                     <h:commandLink styleClass="pull-left notes"
-                                                   value="#{taskBoardBean.cutString(note.name)}"/>
+                                                   value="#{taskBoardBean.cutString(note.name)}"
+                                                   action="#{taskBoardBean.viewNote(note)}"/>
                                 </h:column>
                                 <h:column>
                                     <h:commandLink styleClass="pull-left notes"
-                                                   value="[#{taskBoardBean.cutString(note.user.login)}]"/>
+                                                   value="[#{taskBoardBean.cutString(note.user.login)}]">
+                                        <%--<f:ajax></f:ajax>--%>
+                                    </h:commandLink>
                                 </h:column>
                                 <h:column>
-                                    <h:selectOneMenu disabled="#{not authBean.user.hasRole('LEADER')}" styleClass="notes" value="#{note.state}" onchange="submit()"
+                                    <h:selectOneMenu disabled="#{not authBean.user.hasRole('LEADER')}"
+                                                     styleClass="notes" value="#{note.state}" onchange="submit()"
                                                      valueChangeListener="#{taskBoardBean.changeListener}">
                                         <f:attribute name="note" value="#{note}"/>
                                         <f:selectItem itemValue="" itemLabel=""/>
@@ -108,14 +143,16 @@
                             <h:dataTable var="note" value="#{taskBoardBean.doneNotes}">
                                 <h:column>
                                     <h:commandLink styleClass="pull-left notes"
-                                                   value="#{taskBoardBean.cutString(note.name)}"/>
+                                                   value="#{taskBoardBean.cutString(note.name)}"
+                                                   action="#{taskBoardBean.viewNote(note)}"/>
                                 </h:column>
                                 <h:column>
                                     <h:commandLink styleClass="pull-left notes"
                                                    value="[#{taskBoardBean.cutString(note.user.login)}]"/>
                                 </h:column>
                                 <h:column>
-                                    <h:selectOneMenu disabled="#{not authBean.user.hasRole('LEADER')}" styleClass="notes" value="#{note.state}" onchange="submit()"
+                                    <h:selectOneMenu disabled="#{not authBean.user.hasRole('LEADER')}"
+                                                     styleClass="notes" value="#{note.state}" onchange="submit()"
                                                      valueChangeListener="#{taskBoardBean.changeListener}">
                                         <f:attribute name="note" value="#{note}"/>
                                         <f:selectItem itemValue="" itemLabel=""/>
@@ -131,9 +168,7 @@
             </div>
         </div>
     </div>
-    <div>
-        <h:outputText id="detailed" value="#{taskBoardBean.detailedNote}"/>
-    </div>
+
     <footer>
         <div class="container">
             <div class="row">
