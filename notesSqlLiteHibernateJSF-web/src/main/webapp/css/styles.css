@@ -17,6 +17,9 @@ author: bootply.com
 .container{
     width: 90%;
 }
+.notes{
+  margin: 10px;
+}
 /*
 .col-xs-6{
     width: 33%;

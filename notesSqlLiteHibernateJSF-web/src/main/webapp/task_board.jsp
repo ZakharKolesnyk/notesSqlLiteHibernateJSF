@@ -42,12 +42,22 @@
                         <div class="panel-body">
                             <h:dataTable var="note" value="#{taskBoardBean.waitingNotes}">
                                 <h:column>
-                                    <h:commandLink styleClass="pull-left"
+                                    <h:commandLink styleClass="pull-left notes"
                                                    value="#{taskBoardBean.cutString(note.name)}"/>
                                 </h:column>
                                 <h:column>
-                                    <h:commandLink styleClass="pull-left"
+                                    <h:commandLink styleClass="pull-left notes"
                                                    value="[#{taskBoardBean.cutString(note.user.login)}]"/>
+                                </h:column>
+                                <h:column>
+                                    <h:selectOneMenu styleClass="notes" value="#{note.state}" onchange="submit()"
+                                                     valueChangeListener="#{taskBoardBean.changeListener}">
+                                        <f:attribute name="note" value="#{note}"/>
+                                        <f:selectItem itemValue="" itemLabel=""/>
+                                        <f:selectItem itemValue="#{taskBoardBean.states[0]}" itemLabel="waiting"/>
+                                        <f:selectItem itemValue="#{taskBoardBean.states[1]}" itemLabel="performing"/>
+                                        <f:selectItem itemValue="#{taskBoardBean.states[2]}" itemLabel="done"/>
+                                    </h:selectOneMenu>
                                 </h:column>
                                 <%--<h:selectOneListbox style="width: 231px; height: 27px;position:absolute;left:400px;top:325px;" value="#{taskBoard.states}" size="1">--%>
                                 <%--<f:selectItems value="#{taskBoard.states}" var="d" itemLabel="#{d.name}" itemValue="#{d.name}" />--%>
@@ -65,7 +75,8 @@
             <div class="col-xs-6">
                 <div class="panel panel-default">
                     <h:form>
-                        <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>PERFORMING NOTES</h4>
+                        <div class="panel-heading"><h:commandLink action="#{taskBoardBean.fullPerformingNotesList}"
+                                                                  styleClass="pull-right">View all</h:commandLink><h4>PERFORMING NOTES</h4>
                         </div>
                         <div class="panel-body">
                             <h:dataTable var="note" value="#{taskBoardBean.performingNotes}">
@@ -77,6 +88,24 @@
                                     <h:commandLink styleClass="pull-left"
                                                    value="[#{taskBoardBean.cutString(note.user.login)}]"/>
                                 </h:column>
+                                <h:column>
+                                    <h:selectOneMenu styleClass="notes" value="#{note.state}" onchange="submit()"
+                                                     valueChangeListener="#{taskBoardBean.changeListener}">
+                                        <f:attribute name="note" value="#{note}"/>
+                                        <f:selectItem itemValue="" itemLabel=""/>
+                                        <f:selectItem itemValue="#{taskBoardBean.states[1]}" itemLabel="performing"/>
+                                        <f:selectItem itemValue="#{taskBoardBean.states[0]}" itemLabel="waiting"/>
+                                        <f:selectItem itemValue="#{taskBoardBean.states[2]}" itemLabel="done"/>
+                                    </h:selectOneMenu>
+                                </h:column>
+                                <%--<h:column>--%>
+                                    <%--<h:selectOneMenu value="#{note.state}" onchange="submit()"--%>
+                                                     <%--valueChangeListener="#{taskBoardBean.applyNote(note, taskBoardBean.states[1])}">--%>
+                                        <%--<f:selectItem itemValue="" itemLabel=""/>--%>
+                                        <%--<f:selectItem itemValue="#{taskBoardBean.states[0]}" itemLabel="waiting"/>--%>
+                                        <%--<f:selectItem itemValue="#{taskBoardBean.states[2]}" itemLabel="done"/>--%>
+                                    <%--</h:selectOneMenu>--%>
+                                <%--</h:column>--%>
                             </h:dataTable>
                         </div>
                     </h:form>
@@ -85,23 +114,43 @@
             <div class="col-xs-6">
                 <div class="panel panel-default">
                     <h:form>
-                    <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>DONE NOTES</h4>
-                    </div>
-                    <div class="panel-body">
-                        <h:dataTable var="note" value="#{taskBoardBean.doneNotes}">
-                            <h:column>
-                                <h:commandLink styleClass="pull-left" value="#{taskBoardBean.cutString(note.name)}"/>
-                            </h:column>
-                            <h:column>
-                                <h:commandLink styleClass="pull-left"
-                                               value="[#{taskBoardBean.cutString(note.user.login)}]"/>
-                            </h:column>
-                        </h:dataTable>
-                    </div>
+                        <div class="panel-heading"><h:commandLink action="#{taskBoardBean.fullDoneNotesList}"
+                                                                  styleClass="pull-right">View all</h:commandLink><h4>DONE NOTES</h4>
+                        </div>
+                        <div class="panel-body">
+                            <h:dataTable var="note" value="#{taskBoardBean.doneNotes}">
+                                <h:column>
+                                    <h:commandLink styleClass="pull-left"
+                                                   value="#{taskBoardBean.cutString(note.name)}"/>
+                                </h:column>
+                                <h:column>
+                                    <h:commandLink styleClass="pull-left"
+                                                   value="[#{taskBoardBean.cutString(note.user.login)}]"/>
+                                </h:column>
+                                <h:column>
+                                    <h:selectOneMenu styleClass="notes" value="#{note.state}" onchange="submit()"
+                                                     valueChangeListener="#{taskBoardBean.changeListener}">
+                                        <f:attribute name="note" value="#{note}"/>
+                                        <f:selectItem itemValue="" itemLabel=""/>
+                                        <f:selectItem itemValue="#{taskBoardBean.states[2]}" itemLabel="done"/>
+                                        <f:selectItem itemValue="#{taskBoardBean.states[0]}" itemLabel="waiting"/>
+                                        <f:selectItem itemValue="#{taskBoardBean.states[1]}" itemLabel="performing"/>
+                                    </h:selectOneMenu>
+                                </h:column>
+                                <%--<h:column>--%>
+                                    <%--<h:selectOneMenu value="#{note.state}" onchange="submit()"--%>
+                                                     <%--valueChangeListener="#{taskBoardBean.applyNote(note, taskBoardBean.states[2])}">--%>
+                                        <%--<f:selectItem itemValue="" itemLabel=""/>--%>
+                                        <%--<f:selectItem itemValue="#{taskBoardBean.states[0]}" itemLabel="waiting"/>--%>
+                                        <%--<f:selectItem itemValue="#{taskBoardBean.states[1]}" itemLabel="performing"/>--%>
+                                    <%--</h:selectOneMenu>--%>
+                                <%--</h:column>--%>
+                            </h:dataTable>
+                        </div>
                     </h:form>
+                </div>
             </div>
         </div>
-    </div>
     </div>
     <div>
         <h:outputText id="detailed" value="#{taskBoardBean.detailedNote}"/>
