@@ -37,6 +37,11 @@ public class User implements Serializable {
     @Column(name = "authority")
     private AUTHORITY authority;
 
+    public boolean hasRole(AUTHORITY role) {
+        return authority==role;
+    }
+
+
     public User() {
     }
 

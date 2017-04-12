@@ -8,6 +8,10 @@ import javax.faces.bean.CustomScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 
 
@@ -26,9 +30,9 @@ public class AuthBean implements Serializable {
             if (user == null) {
                 return null;
             }
-//            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-//            session.setAttribute("user", user);
-            return "task_board";
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            session.setAttribute("user", user);
+            return "pages/task_board";
         } catch (IllegalAccessException e) {
             e.printStackTrace();
             return null;
@@ -44,7 +48,10 @@ public class AuthBean implements Serializable {
     }
 
     public String logout() {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+        response.addCookie(new Cookie("JSESSIONID", null));
+        facesContext.getExternalContext().invalidateSession();
         return "index";
     }
 

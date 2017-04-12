@@ -12,11 +12,11 @@
         <title>Notes</title>
         <meta name="generator" content="Bootply"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="../css/bootstrap.css" rel="stylesheet">
         <!--[if lt IE 9]>
         <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <link href="css/styles.css" rel="stylesheet">
+        <link href="../css/styles.css" rel="stylesheet">
     </head>
     <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -50,7 +50,8 @@
                                                    value="[#{taskBoardBean.cutString(note.user.login)}]"/>
                                 </h:column>
                                 <h:column>
-                                    <h:selectOneMenu styleClass="notes" value="#{note.state}" onchange="submit()"
+                                    <h:selectOneMenu disabled="#{not authBean.user.hasRole('LEADER')}"
+                                                     styleClass="notes" value="#{note.state}" onchange="submit()"
                                                      valueChangeListener="#{taskBoardBean.changeListener}">
                                         <f:attribute name="note" value="#{note}"/>
                                         <f:selectItem itemValue="" itemLabel=""/>
@@ -68,7 +69,8 @@
                 <div class="panel panel-default">
                     <h:form>
                         <div class="panel-heading"><h:commandLink action="#{taskBoardBean.fullPerformingNotesList}"
-                                                                  styleClass="pull-right">View all</h:commandLink><h4>PERFORMING NOTES</h4>
+                                                                  styleClass="pull-right">View all</h:commandLink><h4>
+                            PERFORMING NOTES</h4>
                         </div>
                         <div class="panel-body">
                             <h:dataTable var="note" value="#{taskBoardBean.performingNotes}">
@@ -81,7 +83,7 @@
                                                    value="[#{taskBoardBean.cutString(note.user.login)}]"/>
                                 </h:column>
                                 <h:column>
-                                    <h:selectOneMenu styleClass="notes" value="#{note.state}" onchange="submit()"
+                                    <h:selectOneMenu disabled="#{not authBean.user.hasRole('LEADER')}" styleClass="notes" value="#{note.state}" onchange="submit()"
                                                      valueChangeListener="#{taskBoardBean.changeListener}">
                                         <f:attribute name="note" value="#{note}"/>
                                         <f:selectItem itemValue="" itemLabel=""/>
@@ -99,7 +101,8 @@
                 <div class="panel panel-default">
                     <h:form>
                         <div class="panel-heading"><h:commandLink action="#{taskBoardBean.fullDoneNotesList}"
-                                                                  styleClass="pull-right">View all</h:commandLink><h4>DONE NOTES</h4>
+                                                                  styleClass="pull-right">View all</h:commandLink><h4>
+                            DONE NOTES</h4>
                         </div>
                         <div class="panel-body">
                             <h:dataTable var="note" value="#{taskBoardBean.doneNotes}">
@@ -112,7 +115,7 @@
                                                    value="[#{taskBoardBean.cutString(note.user.login)}]"/>
                                 </h:column>
                                 <h:column>
-                                    <h:selectOneMenu styleClass="notes" value="#{note.state}" onchange="submit()"
+                                    <h:selectOneMenu disabled="#{not authBean.user.hasRole('LEADER')}" styleClass="notes" value="#{note.state}" onchange="submit()"
                                                      valueChangeListener="#{taskBoardBean.changeListener}">
                                         <f:attribute name="note" value="#{note}"/>
                                         <f:selectItem itemValue="" itemLabel=""/>
@@ -168,8 +171,8 @@
 
     <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/scripts.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/scripts.js"></script>
     </body>
     </html>
 </f:view>
