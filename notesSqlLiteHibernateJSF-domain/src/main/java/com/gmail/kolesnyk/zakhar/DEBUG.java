@@ -4,49 +4,62 @@ package com.gmail.kolesnyk.zakhar;
 import com.gmail.kolesnyk.zakhar.notes.Note;
 import com.gmail.kolesnyk.zakhar.notes.NoteDao;
 import com.gmail.kolesnyk.zakhar.notes.NoteDaoImpl;
+import com.gmail.kolesnyk.zakhar.notes.STATE;
 import com.gmail.kolesnyk.zakhar.user.AUTHORITY;
 import com.gmail.kolesnyk.zakhar.user.User;
 import com.gmail.kolesnyk.zakhar.user.UserDao;
 import com.gmail.kolesnyk.zakhar.user.UserDaoImpl;
 
-import java.util.Set;
+import java.time.Instant;
+import java.util.Date;
 
 public class DEBUG {
     public static void main(String[] args) {
-        int count=0;
+        int count = 0;
 //        System.out.println(new Date());
         UserDao userDao = new UserDaoImpl();
 
         User user = userDao.byId(1);
-        System.out.println("\n\n----------------------------------"+count++);
+        System.out.println("\n\n----------------------------------" + count++);
         System.out.println(user);
 
         user.setLastName("LAST_NAME");
         userDao.update(user);
         User user2 = userDao.byId(1);
-        System.out.println("\n\n----------------------------------"+count++);
+        System.out.println("\n\n----------------------------------" + count++);
         System.out.println(user2);
 
-        User user3 = new User("111", "111", "1111", "LOGIN1", "111",null, AUTHORITY.USER);
+        User user3 = new User("111", "111", "1111", "LOGIN1", "111", null, AUTHORITY.EMPLOYEE);
         userDao.save(user3);
         User user4 = userDao.byLogin("LOGIN1");
-        System.out.println("\n\n----------------------------------"+count++);
+        System.out.println("\n\n----------------------------------" + count++);
         System.out.println(user4);
 
         userDao.remove(user4);
-        System.out.println("\n\n----------------------------------"+count++);
-        userDao.list().forEach(a-> a.getNotes().forEach(System.out::println));
+        System.out.println("\n\n----------------------------------" + count++);
+        userDao.list().forEach(a -> a.getNotes().forEach(System.out::println));
 
-        System.out.println("\n\n----------------------------------"+count++);
+        System.out.println("\n\n----------------------------------" + count++);
         user.getNotes().forEach(System.out::println);
 
-        NoteDao noteDao=new NoteDaoImpl();
+        NoteDao noteDao = new NoteDaoImpl();
         noteDao.list().forEach(System.out::println);
         System.out.println(user.getAuthority());
         System.out.println(user2.getAuthority());
         System.out.println(user3.getAuthority());
         System.out.println(user4.getAuthority());
 
+//        noteDao.done().forEach(System.out::println);
+//        noteDao.waiting().forEach(System.out::println);
+//        noteDao.performing().forEach(System.out::println);
+
+        Note note = new Note("111", "111", Date.from(Instant.now()), null, user, STATE.WAITING);
+        noteDao.save(note);
+
+        System.out.println(noteDao.byId(note.getIdNote()));
+        System.out.println(noteDao.byStateSublist(STATE.WAITING, 5, 0));
+//        System.out.println(noteDao.byId(note.getCreateDate()));
+//        System.out.println(noteDao.byId(note.getDoneDate()));
 
 
 //        Session session=HibernateUtil.getSessionFactory().openSession();

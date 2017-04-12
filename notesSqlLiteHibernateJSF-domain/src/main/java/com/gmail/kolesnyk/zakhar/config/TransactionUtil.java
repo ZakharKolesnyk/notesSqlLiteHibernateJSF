@@ -5,12 +5,30 @@ import org.hibernate.Session;
 public class TransactionUtil {
     private static volatile Session session = HibernateUtil.getSessionFactory().openSession();
 
-    public static void doTransaction(Transaction transaction) {
+    public static void performTransaction(UpdateTransaction transaction) {
         initSession();
 //        session.getTransaction().begin();
         try {
             transaction.transact();
             session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            if (session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public static  <T> T performTransaction(ReadTransaction<T> transaction) {
+//        initSession();
+//        session.getTransaction().begin();
+        Object dst;
+        try {
+            dst = transaction.transact();
+            session.getTransaction().commit();
+            return (T) dst;
         } catch (Exception e) {
             session.getTransaction().rollback();
             throw e;
@@ -50,7 +68,11 @@ public class TransactionUtil {
         TransactionUtil.session = session;
     }
 
-    public interface Transaction {
+    public interface UpdateTransaction {
         void transact();
+    }
+
+    public interface ReadTransaction<T> {
+        T transact();
     }
 }

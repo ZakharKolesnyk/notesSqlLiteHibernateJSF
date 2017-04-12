@@ -25,19 +25,19 @@
       <Position>3</Position>
       <DataType>TEXT(0,-1)|12</DataType>
     </column>
-    <column id="10" parent="3" name="create_date">
+    <column id="10" parent="3" name="state">
       <Position>4</Position>
-      <DataType>TEXT(0,-1)|12</DataType>
-    </column>
-    <column id="11" parent="3" name="done_date">
-      <Position>5</Position>
-      <DataType>TEXT(0,-1)|12</DataType>
-    </column>
-    <column id="12" parent="3" name="state">
-      <Position>6</Position>
       <DataType>INTEGER(0,-1)|4</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
+    </column>
+    <column id="11" parent="3" name="create_date">
+      <Position>5</Position>
+      <DataType>NUMERIC(0,-1)|6</DataType>
+    </column>
+    <column id="12" parent="3" name="done_date">
+      <Position>6</Position>
+      <DataType>NUMERIC(0,-1)|6</DataType>
     </column>
     <key id="13" parent="3">
       <ColNames>id_note</ColNames>

@@ -1,15 +1,13 @@
 package com.gmail.kolesnyk.zakhar;
 
-import com.gmail.kolesnyk.zakhar.config.HibernateUtil;
 import com.gmail.kolesnyk.zakhar.config.TransactionUtil;
 import org.hibernate.Criteria;
-import org.hibernate.Session;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import static com.gmail.kolesnyk.zakhar.config.TransactionUtil.doTransaction;
+import static com.gmail.kolesnyk.zakhar.config.TransactionUtil.performTransaction;
 import static com.gmail.kolesnyk.zakhar.config.TransactionUtil.getSession;
 
 /**
@@ -33,28 +31,30 @@ public abstract class AbstractDao<T, I extends Serializable> implements BaseDao<
     @Override
     @SuppressWarnings("unchecked")
     public T byId(I id) {
-        return (T) getSession().get(entityClass, id);
+        return performTransaction(() -> (T) getSession().get(entityClass, id));
+//        return (T) getSession().get(entityClass, id);
     }
 
     @Override
     public void save(T object) {
-        doTransaction(() -> getSession().save(object));
+        performTransaction((TransactionUtil.UpdateTransaction) () -> getSession().save(object));
     }
 
     @Override
     public void update(T object) {
-        doTransaction(() -> getSession().update(object));
+        performTransaction(() -> getSession().update(object));
     }
 
     @Override
     public void remove(T object) {
-        doTransaction(() -> getSession().delete(object));
+        performTransaction(() -> getSession().delete(object));
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<T> list() {
-        return getSession().createCriteria(entityClass).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+        return performTransaction((TransactionUtil.ReadTransaction<List<T>>) () -> getSession().createCriteria(entityClass).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list());
+//        return getSession().createCriteria(entityClass).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 
 
