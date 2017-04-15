@@ -1,15 +1,14 @@
 package com.gmail.kolesnyk.zakhar.auth;
 
+import com.gmail.kolesnyk.zakhar.navigation.ViewUtil;
 import com.gmail.kolesnyk.zakhar.user.User;
 import com.gmail.kolesnyk.zakhar.userService.UserService;
 import com.gmail.kolesnyk.zakhar.userService.UserServiceImpl;
 
-import javax.faces.bean.CustomScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -21,9 +20,10 @@ import java.io.Serializable;
 public class AuthBean implements Serializable {
     private User user;
     private UserService userService = new UserServiceImpl();
+    private ViewUtil viewUtil = new ViewUtil();
 
-    private String username = "";
-    private String password = "";
+    private String username;
+    private String password;
 
     public String login() {
         try {
@@ -56,9 +56,9 @@ public class AuthBean implements Serializable {
         try {
             response.sendRedirect("index.jsf");
         } catch (IOException e) {
+            viewUtil.toErrorPage();
             e.printStackTrace();
         }
-//        return "index";
     }
 
     public String getUsername() {

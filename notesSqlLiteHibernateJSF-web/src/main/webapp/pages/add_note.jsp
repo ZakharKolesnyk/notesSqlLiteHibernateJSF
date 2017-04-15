@@ -4,13 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <f:view>
 
-
     <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
-        <title>Holo Theme</title>
+        <title>Notes</title>
         <meta name="generator" content="Bootply"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="../css/bootstrap.css" rel="stylesheet">
@@ -23,54 +22,54 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">
             <h:form>
-                <h:commandLink action="#{taskBoardBean.addUser}" disabled="#{not authBean.user.hasRole('LEADER')}" styleClass="navbar-brand" style="margin-left: 10px;" value="add User"/>
-                <h:commandLink action="#{taskBoardBean.addNote}" disabled="#{not authBean.user.hasRole('LEADER')}" styleClass="navbar-brand" style="margin-right: 10px;" value="add Note"/>
+                <h:commandLink action="#{taskBoardBean.addUser}" disabled="#{not authBean.user.hasRole('LEADER')}"
+                               styleClass="navbar-brand" style="margin-left: 10px;" value="add User"/>
+                <h:commandLink action="#{taskBoardBean.addNote}" disabled="#{not authBean.user.hasRole('LEADER')}"
+                               styleClass="navbar-brand" style="margin-right: 10px;" value="add Note"/>
             </h:form>
         </div>
     </nav>
     <div class="container">
-        <h:form>
         <div class="row vertical-align"> <!--
                     ^--  Additional class -->
-            <div class="col-xs-5 col-sd-5 col-ld-5 col-md-5">
+            <div class="col-xs-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h4>VIEW NOTE</h4>
+
+                    <div class="panel-heading"><h4>NEW NOTE</h4>
                     </div>
-                    <div class="panel-body" align="center" style="height: 320px;">
+                    <div class="panel-body" align="center">
+                        <h:form>
+                            <h:outputText value="responcible"/><br>
+                            <h:inputText required="true" readonly="#{not authBean.user.hasRole('LEADER')}"
+                                         value="#{addNoteBean.employee}"/><br><br>
 
                             <h:outputText value="name"/><br>
-                            <h:inputText value="#{viewNoteBean.name}"/><br><br>
+                            <h:inputText required="true" readonly="#{not authBean.user.hasRole('LEADER')}"
+                                         value="#{addNoteBean.name}"/><br><br>
 
-                            <h:outputText value="last modified"/><br>
-                            <h:inputText readonly="true" value="#{viewNoteBean.createDate}"/><br><br>
+                            <h:outputText value="description"/><br>
+                            <h:inputTextarea rows="11" style="width: 90%" required="true" readonly="#{not authBean.user.hasRole('LEADER')}"
+                                         value="#{addNoteBean.description}"/><br><br>
 
-                            <h:outputText value="state"/><br>
-                            <h:inputText readonly="true" value="#{viewNoteBean.state}"/><br><br>
 
-                            <h:outputText value="responcible"/><br>
-                            <h:inputText value="#{viewNoteBean.login}"/><br><br>
-                                <h:commandLink styleClass="pull-left notes" action="#{viewNoteBean.applyNote}"
-                                               value="apply"/>
-                                <h:commandLink styleClass="pull-right notes" action="#{viewNoteBean.backToTaskBoard}"
-                                               value="back"/>
+                            <h:commandLink disabled="#{not authBean.user.hasRole('LEADER')}"
+                                           styleClass="pull-left notes" action="#{addNoteBean.add}"
+                                           value="add Note"/>
+                        </h:form>
 
+                        <h:form>
+                            <h:commandLink styleClass="pull-right notes" action="#{addNoteBean.backToTaskBoard}"
+                                           value="back"/>
+                        </h:form>
                     </div>
+
                 </div>
             </div>
 
-            <div class="col-xs-7 col-sd-7 col-ld-7 col-md-7">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><h4>DESCRIPTION</h4>
-                    </div>
-                    <div class="panel-body" align="center" style="height: 320px;">
-                        <h:inputTextarea rows="12" style="width: 90%" value="#{viewNoteBean.description}"/><br><br>
-                    </div>
-                </div>
-            </div>
         </div>
-            </h:form>
     </div>
-    <footer><!--footer-->
+
+    <footer>
         <div class="container">
             <div class="row">
                 <h:form>

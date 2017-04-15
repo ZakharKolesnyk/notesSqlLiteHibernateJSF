@@ -4,13 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <f:view>
 
-
     <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
-        <title>Holo Theme</title>
+        <title>Notes</title>
         <meta name="generator" content="Bootply"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="../css/bootstrap.css" rel="stylesheet">
@@ -28,49 +27,19 @@
             </h:form>
         </div>
     </nav>
-    <div class="container">
-        <h:form>
+    <div class="container" style="width: 100%">
         <div class="row vertical-align"> <!--
                     ^--  Additional class -->
-            <div class="col-xs-5 col-sd-5 col-ld-5 col-md-5">
+            <div class="col-xs-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h4>VIEW NOTE</h4>
-                    </div>
-                    <div class="panel-body" align="center" style="height: 320px;">
-
-                            <h:outputText value="name"/><br>
-                            <h:inputText value="#{viewNoteBean.name}"/><br><br>
-
-                            <h:outputText value="last modified"/><br>
-                            <h:inputText readonly="true" value="#{viewNoteBean.createDate}"/><br><br>
-
-                            <h:outputText value="state"/><br>
-                            <h:inputText readonly="true" value="#{viewNoteBean.state}"/><br><br>
-
-                            <h:outputText value="responcible"/><br>
-                            <h:inputText value="#{viewNoteBean.login}"/><br><br>
-                                <h:commandLink styleClass="pull-left notes" action="#{viewNoteBean.applyNote}"
-                                               value="apply"/>
-                                <h:commandLink styleClass="pull-right notes" action="#{viewNoteBean.backToTaskBoard}"
-                                               value="back"/>
-
-                    </div>
+                    <h1 align="center">ERROR</h1>
                 </div>
             </div>
 
-            <div class="col-xs-7 col-sd-7 col-ld-7 col-md-7">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><h4>DESCRIPTION</h4>
-                    </div>
-                    <div class="panel-body" align="center" style="height: 320px;">
-                        <h:inputTextarea rows="12" style="width: 90%" value="#{viewNoteBean.description}"/><br><br>
-                    </div>
-                </div>
-            </div>
         </div>
-            </h:form>
     </div>
-    <footer><!--footer-->
+
+    <footer>
         <div class="container">
             <div class="row">
                 <h:form>

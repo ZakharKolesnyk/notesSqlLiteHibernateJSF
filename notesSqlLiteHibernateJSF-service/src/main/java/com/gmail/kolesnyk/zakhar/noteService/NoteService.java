@@ -20,4 +20,5 @@ public interface NoteService {
     List<Note> doneNotesSublist();
 
     void update(Note note);
+    void save(Note note);
 }

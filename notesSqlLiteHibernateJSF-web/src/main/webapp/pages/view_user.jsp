@@ -21,12 +21,10 @@
     <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".sidebar-nav">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">USER DETAILS</a>
+            <h:form>
+                <h:commandLink action="#{taskBoardBean.addUser}" disabled="#{not authBean.user.hasRole('LEADER')}" styleClass="navbar-brand" style="margin-left: 10px;" value="add User"/>
+                <h:commandLink action="#{taskBoardBean.addNote}" disabled="#{not authBean.user.hasRole('LEADER')}" styleClass="navbar-brand" style="margin-right: 10px;" value="add Note"/>
+            </h:form>
         </div>
     </nav>
     <div class="container" style="width: 100%">
@@ -40,21 +38,23 @@
                         <div class="panel-body">
                             <h:outputText value="firstName"/><br>
                             <h:inputText readonly="#{not (authBean.user.hasRole('LEADER') || authBean.user.login.equals(viewUserBean.login))}" value="#{viewUserBean.firstName}"/><br><br>
+
                             <h:outputText value="lastName"/><br>
                             <h:inputText readonly="#{not (authBean.user.hasRole('LEADER') || authBean.user.login.equals(viewUserBean.login))}" value="#{viewUserBean.lastName}"/><br><br>
+
                             <h:outputText value="email"/><br>
                             <h:inputText readonly="true"  value="#{viewUserBean.email}"/><br><br>
+
                             <h:outputText value="login"/><br>
                             <h:inputText readonly="true"  value="#{viewUserBean.login}"/><br><br>
+
                             <h:outputText value="authority"/><br>
                             <h:inputText readonly="true"  value="#{viewUserBean.authority}"/><br><br>
+
                             <h:commandLink styleClass="pull-left notes" action="#{viewUserBean.applyUser}"
                                            value="apply"/>
-                                <%--</h:column>--%>
-                                <%--</h:dataTable>--%>
 
-                                <%--<h:form>--%>
-                            <h:commandLink styleClass="pull-left notes" action="#{viewUserBean.backToTaskBoard}"
+                            <h:commandLink styleClass="pull-right notes" action="#{viewUserBean.backToTaskBoard}"
                                            value="back"/>
                         </div>
                     </h:form>
@@ -78,9 +78,9 @@
                                                      valueChangeListener="#{viewUserBean.changeListener}">
                                         <f:attribute name="note" value="#{note}"/>
                                         <f:selectItem itemValue="" itemLabel=""/>
-                                        <f:selectItem itemValue="#{viewUserBean.states[0]}" itemLabel="waiting"/>
-                                        <f:selectItem itemValue="#{viewUserBean.states[1]}" itemLabel="performing"/>
-                                        <f:selectItem itemValue="#{viewUserBean.states[2]}" itemLabel="done"/>
+                                        <f:selectItem itemValue="WAITING" itemLabel="WAITING"/>
+                                        <f:selectItem itemValue="PERFORMING" itemLabel="PERFORMING"/>
+                                        <f:selectItem itemValue="DONE" itemLabel="DONE"/>
                                     </h:selectOneMenu>
                                 </h:column>
                             </h:dataTable>
@@ -106,9 +106,9 @@
                                                      valueChangeListener="#{viewUserBean.changeListener}">
                                         <f:attribute name="note" value="#{note}"/>
                                         <f:selectItem itemValue="" itemLabel=""/>
-                                        <f:selectItem itemValue="#{viewUserBean.states[1]}" itemLabel="performing"/>
-                                        <f:selectItem itemValue="#{viewUserBean.states[0]}" itemLabel="waiting"/>
-                                        <f:selectItem itemValue="#{viewUserBean.states[2]}" itemLabel="done"/>
+                                        <f:selectItem itemValue="PERFORMING" itemLabel="PERFORMING"/>
+                                        <f:selectItem itemValue="WAITING" itemLabel="WAITING"/>
+                                        <f:selectItem itemValue="DONE" itemLabel="DONE"/>
                                     </h:selectOneMenu>
                                 </h:column>
                             </h:dataTable>
@@ -134,9 +134,9 @@
                                                      valueChangeListener="#{viewUserBean.changeListener}">
                                         <f:attribute name="note" value="#{note}"/>
                                         <f:selectItem itemValue="" itemLabel=""/>
-                                        <f:selectItem itemValue="#{viewUserBean.states[2]}" itemLabel="done"/>
-                                        <f:selectItem itemValue="#{viewUserBean.states[0]}" itemLabel="waiting"/>
-                                        <f:selectItem itemValue="#{viewUserBean.states[1]}" itemLabel="performing"/>
+                                        <f:selectItem itemValue="DONE" itemLabel="DONE"/>
+                                        <f:selectItem itemValue="WAITING" itemLabel="WAITING"/>
+                                        <f:selectItem itemValue="PERFORMING" itemLabel="PERFORMING"/>
                                     </h:selectOneMenu>
                                 </h:column>
                             </h:dataTable>

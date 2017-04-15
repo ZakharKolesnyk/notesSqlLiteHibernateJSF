@@ -6,8 +6,6 @@ public class TransactionUtil {
     private static volatile Session session = HibernateUtil.getSessionFactory().openSession();
 
     public static void performTransaction(UpdateTransaction transaction) {
-        initSession();
-//        session.getTransaction().begin();
         try {
             transaction.transact();
             session.getTransaction().commit();
@@ -22,8 +20,6 @@ public class TransactionUtil {
     }
 
     public static  <T> T performTransaction(ReadTransaction<T> transaction) {
-//        initSession();
-//        session.getTransaction().begin();
         Object dst;
         try {
             dst = transaction.transact();
@@ -45,14 +41,6 @@ public class TransactionUtil {
     }
 
     private static void initSession() {
-//        try {
-//            session = HibernateUtil.getSessionFactory().openSession();
-//        }catch (HibernateException e){
-//            session = HibernateUtil.getSessionFactory().getCurrentSession();
-//        }
-//        if (session.getTransaction().isActive()){
-//            session.getTransaction().rollback();
-//        }
         if (HibernateUtil.getSessionFactory().isClosed()) {
             session = HibernateUtil.getSessionFactory().openSession();
         } else {
@@ -61,11 +49,6 @@ public class TransactionUtil {
         if (!session.getTransaction().isActive()) {
             session.getTransaction().begin();
         }
-
-    }
-
-    public static void setSession(Session session) {
-        TransactionUtil.session = session;
     }
 
     public interface UpdateTransaction {

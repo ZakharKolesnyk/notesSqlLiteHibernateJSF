@@ -15,8 +15,6 @@ import static com.gmail.kolesnyk.zakhar.config.TransactionUtil.getSession;
  */
 public abstract class AbstractDao<T, I extends Serializable> implements BaseDao<T, I> {
 
-//    protected Session session;
-
     /**
      * class type of entity
      */
@@ -32,7 +30,6 @@ public abstract class AbstractDao<T, I extends Serializable> implements BaseDao<
     @SuppressWarnings("unchecked")
     public T byId(I id) {
         return performTransaction(() -> (T) getSession().get(entityClass, id));
-//        return (T) getSession().get(entityClass, id);
     }
 
     @Override
@@ -54,8 +51,5 @@ public abstract class AbstractDao<T, I extends Serializable> implements BaseDao<
     @SuppressWarnings("unchecked")
     public List<T> list() {
         return performTransaction((TransactionUtil.ReadTransaction<List<T>>) () -> getSession().createCriteria(entityClass).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list());
-//        return getSession().createCriteria(entityClass).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
-
-
 }

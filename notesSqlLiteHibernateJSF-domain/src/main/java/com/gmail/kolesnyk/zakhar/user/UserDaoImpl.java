@@ -16,15 +16,11 @@ public class UserDaoImpl extends AbstractDao<User,Integer> implements UserDao {
     public User byLogin(String login) {
         return performTransaction(() -> (User) getSession().createCriteria(User.class)
                 .add(Restrictions.eq("login", login)).uniqueResult());
-//        return (User) getSession().createCriteria(User.class)
-//                .add(Restrictions.eq("login", login)).uniqueResult();
     }
 
     @Override
     public User byEmail(String email) {
         return performTransaction(() -> (User) getSession().createCriteria(User.class)
                 .add(Restrictions.eq("email", email)).uniqueResult());
-//        return (User) getSession().createCriteria(User.class)
-//                .add(Restrictions.eq("email", email)).uniqueResult();
     }
 }

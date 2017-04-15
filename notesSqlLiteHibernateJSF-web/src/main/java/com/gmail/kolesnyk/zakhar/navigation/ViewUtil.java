@@ -7,13 +7,16 @@ import com.gmail.kolesnyk.zakhar.notes.STATE;
 
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by User on 15.04.2017.
  */
 public class ViewUtil {
-    private final static int LENGTH_NAME_ON_PAGE = 20;
+    private final static int LENGTH_NAME_ON_PAGE = 15;
 
     private NoteService noteService = new NoteServiceImpl();
 
@@ -23,7 +26,7 @@ public class ViewUtil {
         STATE oldState = (STATE) event.getOldValue();
         STATE newState = (STATE) event.getNewValue();
         note.setState(newState);
-        noteService.update(note);
+
         switch (oldState) {
             case DONE: {
                 dNotes.remove(note);
@@ -40,25 +43,20 @@ public class ViewUtil {
         }
         switch (newState) {
             case DONE: {
+                note.setDoneDate(new Date());
                 dNotes.add(note);
-//                sortBeforeView(doneNotes);
-//                doneNotes.sort(Comparator.comparing(Note::getCreateDate));
-//                doneNotes.
                 break;
             }
             case PERFORMING: {
                 pNotes.add(note);
-//                sortBeforeView(performingNotes);
-//                performingNotes.sort((o1, o2) -> o2.getCreateDate().compareTo(o1.getCreateDate()));
                 break;
             }
             case WAITING: {
                 wNotes.add(note);
-//                sortBeforeView(waitingNotes);
-//                waitingNotes.sort((o1, o2) -> o2.getCreateDate().compareTo(o1.getCreateDate()));
                 break;
             }
         }
+        noteService.update(note);
     }
 
     public String cutString(String str) {
@@ -74,16 +72,17 @@ public class ViewUtil {
     }
 
     public String viewNote(Note note) {
-//        Note note = (Note) event.getComponent().getAttributes().get("note");
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("note", note);
-//        System.out.println("VIEW FORWARD");
-//        viewNoteBean.setNote(note);
         return "view_note";
-//        String uri = "view_note.jsf";
-//        try {
-//            FacesContext.getCurrentInstance().getExternalContext().dispatch(uri);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+    }
+
+    public void toErrorPage() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+        try {
+            response.sendRedirect("error.jsf");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

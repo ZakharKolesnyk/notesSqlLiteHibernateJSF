@@ -15,7 +15,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -40,44 +39,53 @@ public class ViewUserBean implements Serializable {
     public ViewUserBean() {
         noteService = new NoteServiceImpl();
         userService = new UserServiceImpl();
-        viewUtil=new ViewUtil();
-        waitingNotes=new ArrayList<>();
-        performingNotes=new ArrayList<>();
-        doneNotes=new ArrayList<>();
+        viewUtil = new ViewUtil();
+        waitingNotes = new ArrayList<>();
+        performingNotes = new ArrayList<>();
+        doneNotes = new ArrayList<>();
         init((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user"));
     }
 
     private void init(User user) {
-        this.user = user;
-        firstName = user.getFirstName();
-        lastName = user.getLastName();
-        email = user.getEmail();
-        login = user.getLogin();
-        authority = user.getAuthority().name();
-        fullSet = user.getNotes();
-        fullSet.stream().sorted((o1, o2) -> o2.getCreateDate().compareTo(o1.getCreateDate())).forEach(note -> {
-            switch (note.getState()) {
-                case WAITING: {
-                    waitingNotes.add(note);
-                    break;
+        try {
+            this.user = user;
+            firstName = user.getFirstName();
+            lastName = user.getLastName();
+            email = user.getEmail();
+            login = user.getLogin();
+            authority = user.getAuthority().name();
+            fullSet = user.getNotes();
+            fullSet.stream().sorted((o1, o2) -> o2.getCreateDate().compareTo(o1.getCreateDate())).forEach(note -> {
+                switch (note.getState()) {
+                    case WAITING: {
+                        waitingNotes.add(note);
+                        break;
+                    }
+                    case PERFORMING: {
+                        performingNotes.add(note);
+                        break;
+                    }
+                    case DONE: {
+                        doneNotes.add(note);
+                        break;
+                    }
                 }
-                case PERFORMING: {
-                    performingNotes.add(note);
-                    break;
-                }
-                case DONE: {
-                    doneNotes.add(note);
-                    break;
-                }
-            }
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            viewUtil.toErrorPage();
+        }
     }
 
     public void applyUser() {
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        userService.update(user);
-//        taskBoardBean.reSortNotes();
+        try {
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            userService.update(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            viewUtil.toErrorPage();
+        }
     }
 
     public String backToTaskBoard() {
@@ -90,8 +98,6 @@ public class ViewUserBean implements Serializable {
 
     public String viewNote(Note note) {
         return viewUtil.viewNote(note);
-//        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("note", note);
-//        return "view_note";
     }
 
     public void changeListener(ValueChangeEvent event) {
@@ -138,10 +144,6 @@ public class ViewUserBean implements Serializable {
         this.authority = authority;
     }
 
-    public Set<Note> getFullSet() {
-        return fullSet;
-    }
-
     public List<Note> getWaitingNotes() {
         viewUtil.sortBeforeView(waitingNotes);
         return waitingNotes;
@@ -159,8 +161,5 @@ public class ViewUserBean implements Serializable {
 
     public STATE[] getStates() {
         return states;
-    }
-    private void sortBeforeView(List<Note> list){
-        list.sort((o1, o2) -> o2.getCreateDate().compareTo(o1.getCreateDate()));
     }
 }

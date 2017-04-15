@@ -1,5 +1,6 @@
 package com.gmail.kolesnyk.zakhar.userService;
 
+import com.gmail.kolesnyk.zakhar.user.AUTHORITY;
 import com.gmail.kolesnyk.zakhar.user.User;
 import com.gmail.kolesnyk.zakhar.user.UserDao;
 import com.gmail.kolesnyk.zakhar.user.UserDaoImpl;
@@ -35,7 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registrationUser(String firstName, String lastName, Timestamp birthDate, String login, String pass, String confirmPass, String email, String phone) throws IllegalAccessException {
+    public void registrationUser(String firstName, String lastName, String login, String email, String pass, String confirmPass,  AUTHORITY authority) throws IllegalAccessException {
         if (!pass.trim().equals(confirmPass.trim())) {
             throw new IllegalArgumentException("passwords not match");
         }
@@ -43,8 +44,9 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setLogin(login);
-        user.setPass(encoder.encodePassword(pass.trim()));
         user.setEmail(email);
+        user.setPass(encoder.encodePassword(pass.trim()));
+        user.setAuthority(authority);
         userDao.save(user);
     }
 

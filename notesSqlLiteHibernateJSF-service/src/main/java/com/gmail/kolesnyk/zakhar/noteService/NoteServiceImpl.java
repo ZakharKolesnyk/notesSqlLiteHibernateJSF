@@ -51,5 +51,8 @@ public class NoteServiceImpl implements NoteService {
         noteDao.update(note);
     }
 
-
+    @Override
+    public void save(Note note) {
+        noteDao.save(note);
+    }
 }
