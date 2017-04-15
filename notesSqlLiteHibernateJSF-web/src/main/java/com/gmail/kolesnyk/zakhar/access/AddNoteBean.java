@@ -14,6 +14,12 @@ import java.util.Date;
 
 import static com.gmail.kolesnyk.zakhar.notes.STATE.WAITING;
 
+/**
+ * The {@code AddNoteBean} JSF Bean using for creating and saving to database new {@link Note}
+ *
+ * @author Kolesnyk Zakhar
+ * @since JDK1.8
+ */
 @ViewScoped
 @ManagedBean
 public class AddNoteBean implements Serializable {
@@ -31,6 +37,9 @@ public class AddNoteBean implements Serializable {
         viewUtil = new ViewUtil();
     }
 
+    /**
+     * method create and save new {@link Note}, invoking on JSF UI
+     */
     public void add() {
         try {
             Note note = new Note();
@@ -47,6 +56,9 @@ public class AddNoteBean implements Serializable {
         }
     }
 
+    /**
+     * method initiate request to pages/task_board.jsf invoking on JSF UI
+     */
     public String backToTaskBoard() {
         return "task_board";
     }

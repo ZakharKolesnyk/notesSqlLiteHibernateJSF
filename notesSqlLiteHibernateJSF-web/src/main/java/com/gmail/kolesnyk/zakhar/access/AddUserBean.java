@@ -9,6 +9,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 
+/**
+ * The {@code AddUserBean} JSF Bean using for creating and saving to database new {@link com.gmail.kolesnyk.zakhar.user.User}
+ *
+ * @author Kolesnyk Zakhar
+ * @since JDK1.8
+ */
 @ViewScoped
 @ManagedBean
 public class AddUserBean implements Serializable {
@@ -28,6 +34,9 @@ public class AddUserBean implements Serializable {
         viewUtil = new ViewUtil();
     }
 
+    /**
+     * method create and save new {@link com.gmail.kolesnyk.zakhar.user.User}, invoking on JSF UI
+     */
     public void add() {
         try {
             userService.registrationUser(firstName, lastName, login, email, password, confirm, authority);
@@ -38,6 +47,9 @@ public class AddUserBean implements Serializable {
         }
     }
 
+    /**
+     * method initiate request to pages/task_board.jsf invoking on JSF UI
+     */
     public String backToTaskBoard() {
         return "task_board";
     }

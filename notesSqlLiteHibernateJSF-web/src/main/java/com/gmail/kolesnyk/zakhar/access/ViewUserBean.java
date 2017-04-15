@@ -4,7 +4,6 @@ import com.gmail.kolesnyk.zakhar.navigation.ViewUtil;
 import com.gmail.kolesnyk.zakhar.noteService.NoteService;
 import com.gmail.kolesnyk.zakhar.noteService.NoteServiceImpl;
 import com.gmail.kolesnyk.zakhar.notes.Note;
-import com.gmail.kolesnyk.zakhar.notes.STATE;
 import com.gmail.kolesnyk.zakhar.user.User;
 import com.gmail.kolesnyk.zakhar.userService.UserService;
 import com.gmail.kolesnyk.zakhar.userService.UserServiceImpl;
@@ -18,10 +17,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+
+/**
+ * The {@code ViewUserBean} JSF Bean using for viewing {@link User}
+ *
+ * @author Kolesnyk Zakhar
+ * @since JDK1.8
+ */
 @ViewScoped
 @ManagedBean
 public class ViewUserBean implements Serializable {
-    private final STATE[] states = STATE.values();
     private NoteService noteService;
     private UserService userService;
     private ViewUtil viewUtil;
@@ -77,6 +82,9 @@ public class ViewUserBean implements Serializable {
         }
     }
 
+    /**
+     * apply example entity of {@link User} in database, invoking on JSF UI
+     */
     public void applyUser() {
         try {
             user.setFirstName(firstName);
@@ -88,6 +96,9 @@ public class ViewUserBean implements Serializable {
         }
     }
 
+    /**
+     * method initiate request to pages/task_board.jsf invoking on JSF UI
+     */
     public String backToTaskBoard() {
         return "task_board";
     }
@@ -157,9 +168,5 @@ public class ViewUserBean implements Serializable {
     public List<Note> getDoneNotes() {
         viewUtil.sortBeforeView(doneNotes);
         return doneNotes;
-    }
-
-    public STATE[] getStates() {
-        return states;
     }
 }

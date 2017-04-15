@@ -13,6 +13,13 @@ import javax.faces.event.ValueChangeEvent;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * The {@code TaskBoardBean} JSF Bean using for viewing all {@link Note} by it {@link Note#state} in different columns
+ * allow to open page with detailing about user or note
+ *
+ * @author Kolesnyk Zakhar
+ * @since JDK1.8
+ */
 @SessionScoped
 @ManagedBean
 public class TaskBoardBean implements Serializable {
@@ -37,27 +44,56 @@ public class TaskBoardBean implements Serializable {
 
     }
 
+    /**
+     * method initiate request to pages/add_user.jsf invoking on JSF UI
+     */
     public String addUser() {
         return "add_user";
     }
 
+    /**
+     * method initiate request to pages/add_note.jsf invoking on JSF UI
+     */
     public String addNote() {
         return "add_note";
     }
 
+    /**
+     * listener for changing in HTML selector what invoking on JSF UI
+     *
+     * @param event event form JSF UI
+     */
     public void changeListener(ValueChangeEvent event) {
         viewUtil.moveNote(event, waitingNotes, performingNotes, doneNotes);
     }
 
+    /**
+     * method initiate request to pages/view_user.jsf invoking on JSF UI,
+     * and addition example of {@link User} to session scope
+     *
+     * @param user example of entity {@link User} what being added to session scope
+     */
     public String viewUser(User user) {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
         return "view_user";
     }
 
+    /**
+     * method cutting strings to size of {@link ViewUtil#LENGTH_NAME_ON_PAGE} invoking on JSF UI
+     *
+     * @param str string what need to cut
+     * @return cut string
+     */
     public String cutString(String str) {
         return viewUtil.cutString(str);
     }
 
+    /**
+     * method initiate request to pages/view_note.jsf invoking on JSF UI
+     * and addition example of {@link Note} to session scope
+     *
+     * @param note example of entity {@link Note} what being added to session scope
+     */
     public String viewNote(Note note) {
         return viewUtil.viewNote(note);
     }

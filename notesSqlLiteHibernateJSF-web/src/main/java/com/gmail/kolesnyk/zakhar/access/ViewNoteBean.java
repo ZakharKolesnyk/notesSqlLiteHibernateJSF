@@ -13,6 +13,12 @@ import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * The {@code ViewNoteBean} JSF Bean using for viewing {@link Note}
+ *
+ * @author Kolesnyk Zakhar
+ * @since JDK1.8
+ */
 @ViewScoped
 @ManagedBean
 public class ViewNoteBean implements Serializable {
@@ -53,6 +59,9 @@ public class ViewNoteBean implements Serializable {
         }
     }
 
+    /**
+     * apply example entity of {@link Note} in database, invoking on JSF UI
+     */
     public void applyNote() {
         try {
             note.setCreateDate(new Date());
@@ -67,6 +76,9 @@ public class ViewNoteBean implements Serializable {
         }
     }
 
+    /**
+     * method initiate request to pages/task_board.jsf invoking on JSF UI
+     */
     public String backToTaskBoard() {
         return "task_board";
     }

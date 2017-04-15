@@ -14,7 +14,12 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serializable;
 
-
+/**
+ * The {@code AuthBean} JSF Bean using for authentication operations of users
+ *
+ * @author Kolesnyk Zakhar
+ * @since JDK1.8
+ */
 @SessionScoped
 @ManagedBean
 public class AuthBean implements Serializable {
@@ -25,6 +30,10 @@ public class AuthBean implements Serializable {
     private String username;
     private String password;
 
+    /**
+     * method initiate request to pages/task_board.jsf if user login and password
+     * is coincides with data in database(login), invoking on JSF UI
+     */
     public String login() {
         try {
             user = userService.getUserByLoginOrEmailAndPassword(username, password);
@@ -40,14 +49,9 @@ public class AuthBean implements Serializable {
         }
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
+    /**
+     * method initiate request to pages/index.jsf and invalidate session(logout), invoking on JSF UI
+     */
     public void logout() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
@@ -75,5 +79,13 @@ public class AuthBean implements Serializable {
 
     public void setPassword(String password) {
         this.password = password.trim();
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

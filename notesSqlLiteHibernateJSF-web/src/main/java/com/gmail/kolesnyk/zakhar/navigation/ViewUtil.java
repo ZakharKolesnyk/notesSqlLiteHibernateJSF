@@ -13,13 +13,30 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by User on 15.04.2017.
+ * The {@code ViewUtil} utility class for UI needs
+ *
+ * @author Kolesnyk Zakhar
+ * @since JDK1.8
  */
 public class ViewUtil {
+
+    /**
+     * constant field what using to cut strings for JSF UI
+     */
     private final static int LENGTH_NAME_ON_PAGE = 15;
 
     private NoteService noteService = new NoteServiceImpl();
 
+
+    /**
+     * method moving {@link Note} if on it changed {@link Note#state}
+     * to corresponding list (waiting, performing, done) and updating it on database
+     *
+     * @param event  event from JSF UI
+     * @param wNotes list of waiting notes
+     * @param pNotes list of performing notes
+     * @param dNotes list of done notes
+     */
     public void moveNote(ValueChangeEvent event, List<Note> wNotes, List<Note> pNotes, List<Note> dNotes) {
         event.getComponent().getParent().getParent().getChildren().remove(event.getComponent().getParent());
         Note note = (Note) event.getComponent().getAttributes().get("note");
@@ -59,6 +76,12 @@ public class ViewUtil {
         noteService.update(note);
     }
 
+    /**
+     * method cut string by {@link #LENGTH_NAME_ON_PAGE}
+     *
+     * @param str string what need to cut
+     * @return cut string
+     */
     public String cutString(String str) {
         if (str.length() > LENGTH_NAME_ON_PAGE) {
             return str.substring(0, LENGTH_NAME_ON_PAGE);
@@ -66,16 +89,29 @@ public class ViewUtil {
         return str;
     }
 
-
+    /**
+     * method sorting {@link List<Note>} by {@link Note#createDate} in DESC order
+     *
+     * @param list list what need to sort
+     */
     public void sortBeforeView(List<Note> list) {
         list.sort((o1, o2) -> o2.getCreateDate().compareTo(o1.getCreateDate()));
     }
 
+    /**
+     * method initiate request to pages/view_note.jsf and addition example of {@link Note}
+     * what need to view to session scope, invoking on JSF UI
+     *
+     * @param note note what need to view
+     */
     public String viewNote(Note note) {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("note", note);
         return "view_note";
     }
 
+    /**
+     * method initiate request to pages/error.jsf, using when need show error page, invoking on JSF UI
+     */
     public void toErrorPage() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
