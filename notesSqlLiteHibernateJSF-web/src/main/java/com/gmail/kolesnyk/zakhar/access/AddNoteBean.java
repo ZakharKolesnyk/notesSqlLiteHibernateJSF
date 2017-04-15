@@ -33,7 +33,6 @@ public class AddNoteBean implements Serializable {
 
     public void add() {
         try {
-            System.out.println("add");
             Note note = new Note();
             note.setName(name);
             note.setDescription(description);

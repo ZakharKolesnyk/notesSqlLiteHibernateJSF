@@ -6,16 +6,9 @@
         <property name="show_sql">false</property>
         <property name="format_sql">true</property>
         <property name="dialect">com.gmail.kolesnyk.zakhar.config.SQLiteDialect</property>
-        <!--<property name="dialect">org.hibernate.dialect.SQLiteDialect</property>-->
         <property name="connection.driver_class">org.sqlite.JDBC</property>
         <property name="connection.url">jdbc:sqlite:${basedir}/src/main/resources/db/notes_db.sqlite</property>
         <property name="hibernate.current_session_context_class">thread</property>
-        <!--<property name="connection.url">jdbc:sqlite:D:/install/Java BUILD/Project/[petProjects]/notesSqlLiteHibernateJSF/notesSqlLiteHibernateJSF-domain/src/main/resources/db/notes_db.sqlite</property>-->
-        <!--<property name="connection.username"></property>-->
-        <!--<property name="connection.password"></property>-->
-
-        <!--<property name="hibernate.hbm2ddl.auto">update</property>-->
-
         <mapping class="com.gmail.kolesnyk.zakhar.user.User"/>
         <mapping class="com.gmail.kolesnyk.zakhar.notes.Note"/>
     </session-factory>

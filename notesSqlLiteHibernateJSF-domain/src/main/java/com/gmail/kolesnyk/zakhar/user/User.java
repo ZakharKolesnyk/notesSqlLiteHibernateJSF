@@ -38,7 +38,7 @@ public class User implements Serializable {
     private AUTHORITY authority;
 
     public boolean hasRole(AUTHORITY role) {
-        return authority==role;
+        return authority == role;
     }
 
 

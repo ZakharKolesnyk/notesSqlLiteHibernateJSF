@@ -4,32 +4,49 @@ package com.gmail.kolesnyk.zakhar;
 import java.util.List;
 
 /**
- * interface contains main methods that required for ORM relations
+ * The {@code UserDao} contains main methods that required for ORM relations
+ *
+ * @author Kolesnyk Zakhar
+ * @see com.gmail.kolesnyk.zakhar.AbstractDao
+ * @see com.gmail.kolesnyk.zakhar.user.UserDao
+ * @see com.gmail.kolesnyk.zakhar.notes.NoteDao
+ * @since JDK1.8
  */
 public interface BaseDao<T, I> {
 
     /**
-     * return entity by primary key in table
+     * method allow to get entity by primary key of table
+     *
+     * @param id primary key of entity
+     * @return entity
      */
     T byId(I id);
 
     /**
-     * add new row with describe of entity in suited table
+     * add new row what mapped entity in suited table
+     *
+     * @param object entity for saving
      */
     void save(T object);
 
     /**
-     * update row where described entity in suited table
+     * update row where mapped entity in suited table
+     *
+     * @param object entity for updating
      */
     void update(T object);
 
     /**
-     * remove row where described entity from suited table
+     * remove row where mapped entity in suited table
+     *
+     * @param object entity for removing
      */
     void remove(T object);
 
     /**
      * return list of all entities from suited table
+     *
+     * @return {@link List<>} of entity
      */
     List<T> list();
 }

@@ -1,4 +1,4 @@
-/*
+/**
  * SQLite dialect for Hibernate 4.x
  *
  * Based on the work of {@link https://github.com/gwenn/sqlite-dialect}
