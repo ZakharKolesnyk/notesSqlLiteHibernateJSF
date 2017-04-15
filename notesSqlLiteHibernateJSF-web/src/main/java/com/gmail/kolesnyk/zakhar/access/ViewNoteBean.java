@@ -7,18 +7,18 @@ import com.gmail.kolesnyk.zakhar.userService.UserService;
 import com.gmail.kolesnyk.zakhar.userService.UserServiceImpl;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import java.io.Serializable;
-import java.util.Map;
+import java.util.Date;
 
 @ViewScoped
 @ManagedBean
 public class ViewNoteBean implements Serializable {
 
+//    @ManagedProperty(value="#{taskBoardBean}")
+//    TaskBoardBean taskBoardBean;
     private NoteService noteService;
     private UserService userService;
     private Note note;
@@ -36,14 +36,12 @@ public class ViewNoteBean implements Serializable {
     }
 
     public void init(Note note) {
-        System.out.println("init");
-        System.out.println("note in init"+ note);
         this.note = note;
-        this.name=note.getName();
+        this.name = note.getName();
         this.description = note.getDescription();
         this.state = note.getState().name();
         this.createDate = note.getCreateDate().toString();
-        if (note.getDoneDate()!=null) {
+        if (note.getDoneDate() != null) {
             this.doneDate = note.getDoneDate().toString();
         }
         this.login = note.getUser().getLogin();
@@ -55,13 +53,16 @@ public class ViewNoteBean implements Serializable {
 //        atributes.values().forEach(System.out::println);
 //        System.out.println(note);
 //        System.out.println(name);
+        note.setCreateDate(new Date());
         note.setName(name);
         note.setDescription(description);
         note.setUser(userService.getByLogin(login));
+        createDate = note.getCreateDate().toString();
         noteService.update(note);
+//        taskBoardBean.reSortNotes();
     }
 
-    public String backToTaskBoard(){
+    public String backToTaskBoard() {
         return "task_board";
     }
 

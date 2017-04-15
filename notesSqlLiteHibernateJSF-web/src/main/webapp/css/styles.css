@@ -14,9 +14,9 @@ author: bootply.com
     display: flex;
     align-items: center;
 }
-.container{
-    width: 90%;
-}
+/*.container{*/
+    /*width: 90%;*/
+/*}*/
 .notes{
   margin: 10px;
 }

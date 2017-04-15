@@ -62,7 +62,7 @@
     <div class="container">
         <div class="row vertical-align"> <!--
                     ^--  Additional class -->
-            <div class="col-xs-6">
+            <div class="col-xs-4">
                 <div class="panel panel-default">
                     <h:form>
                         <div class="panel-heading"><h:commandLink action="#{taskBoardBean.fullWaitingNotesList}"
@@ -96,7 +96,7 @@
                     </h:form>
                 </div>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-4">
                 <div class="panel panel-default">
                     <h:form>
                         <div class="panel-heading"><h:commandLink action="#{taskBoardBean.fullPerformingNotesList}"
@@ -132,7 +132,7 @@
                     </h:form>
                 </div>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-4">
                 <div class="panel panel-default">
                     <h:form>
                         <div class="panel-heading"><h:commandLink action="#{taskBoardBean.fullDoneNotesList}"

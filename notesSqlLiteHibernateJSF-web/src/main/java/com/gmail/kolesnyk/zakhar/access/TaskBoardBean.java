@@ -5,15 +5,11 @@ import com.gmail.kolesnyk.zakhar.noteService.NoteServiceImpl;
 import com.gmail.kolesnyk.zakhar.notes.Note;
 import com.gmail.kolesnyk.zakhar.notes.STATE;
 
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.Comparator;
 import java.util.List;
 
 @SessionScoped
@@ -61,17 +57,21 @@ public class TaskBoardBean implements Serializable {
         switch (newState) {
             case DONE: {
                 doneNotes.add(note);
-                doneNotes.sort(Comparator.comparing(Note::getCreateDate));
+//                sortBeforeView(doneNotes);
+//                doneNotes.sort(Comparator.comparing(Note::getCreateDate));
+//                doneNotes.
                 break;
             }
             case PERFORMING: {
                 performingNotes.add(note);
-                performingNotes.sort(Comparator.comparing(Note::getCreateDate));
+//                sortBeforeView(performingNotes);
+//                performingNotes.sort((o1, o2) -> o2.getCreateDate().compareTo(o1.getCreateDate()));
                 break;
             }
             case WAITING: {
                 waitingNotes.add(note);
-                waitingNotes.sort(Comparator.comparing(Note::getCreateDate));
+//                sortBeforeView(waitingNotes);
+//                waitingNotes.sort((o1, o2) -> o2.getCreateDate().compareTo(o1.getCreateDate()));
                 break;
             }
         }
@@ -87,7 +87,7 @@ public class TaskBoardBean implements Serializable {
     public String viewNote(Note note) {
 //        Note note = (Note) event.getComponent().getAttributes().get("note");
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("note", note);
-        System.out.println("VIEW FORWARD");
+//        System.out.println("VIEW FORWARD");
 //        viewNoteBean.setNote(note);
         return "view_note";
 //        String uri = "view_note.jsf";
@@ -115,6 +115,7 @@ public class TaskBoardBean implements Serializable {
     }
 
     public List<Note> getWaitingNotes() {
+        sortBeforeView(waitingNotes);
         return waitingNotes;
     }
 
@@ -123,6 +124,7 @@ public class TaskBoardBean implements Serializable {
     }
 
     public List<Note> getPerformingNotes() {
+        sortBeforeView(performingNotes);
         return performingNotes;
     }
 
@@ -131,12 +133,23 @@ public class TaskBoardBean implements Serializable {
     }
 
     public List<Note> getDoneNotes() {
+        sortBeforeView(doneNotes);
         return doneNotes;
     }
 
     public void setDoneNotes(List<Note> doneNotes) {
         this.doneNotes = doneNotes;
     }
+
+    private void sortBeforeView(List<Note> list){
+        list.sort((o1, o2) -> o2.getCreateDate().compareTo(o1.getCreateDate()));
+    }
+
+//    public void reSortNotes(){
+//        sortBeforeView(waitingNotes);
+//        sortBeforeView(performingNotes);
+//        sortBeforeView(doneNotes);
+//    }
 
 //    public Note getViewNote() {
 //        return viewNote;

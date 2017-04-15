@@ -31,48 +31,99 @@
         </div>
     </nav>
     <div class="container">
+        <h:form>
         <div class="row vertical-align"> <!--
                     ^--  Additional class -->
-            <div class="col-xs-6" style="width: 100%;">
+            <div class="col-xs-5 col-sd-5 col-ld-5 col-md-5">
                 <div class="panel panel-default">
                     <div class="panel-heading"><h4>VIEW NOTE</h4>
                     </div>
-                    <div class="panel-body">
-                            <h:form style="align-items: center">
-                                <%--<h:dataTable>--%>
-                                <%--<h:outputText id="detailed" value="#{taskBoardBean.detailedNote}"/>--%>
-                                <%--<h:column>--%>
-                                <h:outputText value="name"/><br>
-                                <h:inputText id="name" value="#{viewNoteBean.name}"/><br><br>
-                                <%--</h:column>--%>
-                                <%--<h:column>--%>
-                                <h:outputText value="description"/><br>
-                                <h:inputText value="#{viewNoteBean.description}"/><br><br>
-                                <%--</h:column>--%>
-                                <%--<h:column>--%>
-                                <h:outputText value="last modified"/><br>
-                                <h:inputText readonly="true" value="#{viewNoteBean.createDate}"/><br><br>
-                                <%--</h:column>--%>
-                                <%--<h:column>--%>
-                                <h:outputText value="state"/><br>
-                                <h:inputText readonly="true" value="#{viewNoteBean.state}"/><br><br>
-                                <%--</h:column>--%>
-                                <%--<h:column>--%>
-                                <h:outputText value="responcible"/><br>
-                                <h:inputText value="#{viewNoteBean.login}"/><br><br>
-                                <%--</h:column>--%>
-                                <%--<h:column>--%>
-                                <h:commandLink styleClass="pull-left notes" action="#{viewNoteBean.applyNote}" value="apply"/>
-                                <%--</h:column>--%>
-                                <%--</h:dataTable>--%>
-                            </h:form>
-                            <h:form>
-                                <h:commandLink styleClass="pull-left notes" action="#{viewNoteBean.backToTaskBoard}" value="back"/>
-                            </h:form>
+                    <div class="panel-body" align="center" style="height: 320px;">
+
+                            <%--<h:dataTable>--%>
+                            <%--<h:outputText id="detailed" value="#{taskBoardBean.detailedNote}"/>--%>
+                            <%--<h:column>--%>
+                            <%--<h:outputText value="description"/><br>--%>
+                            <%--<h:inputTextarea rows="5" cols="90" value="#{viewNoteBean.description}"/><br><br>--%>
+
+                            <h:outputText value="name"/><br>
+                            <h:inputText id="name" value="#{viewNoteBean.name}"/><br><br>
+                            <%--</h:column>--%>
+                            <%--<h:column>--%>
+
+                            <%--</h:column>--%>
+                            <%--<h:column>--%>
+                            <h:outputText value="last modified"/><br>
+                            <h:inputText readonly="true" value="#{viewNoteBean.createDate}"/><br><br>
+                            <%--</h:column>--%>
+                            <%--<h:column>--%>
+                            <h:outputText value="state"/><br>
+                            <h:inputText readonly="true" value="#{viewNoteBean.state}"/><br><br>
+                            <%--</h:column>--%>
+                            <%--<h:column>--%>
+                            <h:outputText value="responcible"/><br>
+                            <h:inputText value="#{viewNoteBean.login}"/><br><br>
+                            <%--</h:column>--%>
+                            <%--<h:column>--%>
+                                <h:commandLink styleClass="pull-left notes" action="#{viewNoteBean.applyNote}"
+                                               value="apply"/>
+                                    <%--</h:column>--%>
+                                    <%--</h:dataTable>--%>
+
+                                    <%--<h:form>--%>
+                                <h:commandLink styleClass="pull-left notes" action="#{viewNoteBean.backToTaskBoard}"
+                                               value="back"/>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-7 col-sd-7 col-ld-7 col-md-7">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h4>DESCRIPTION</h4>
+                    </div>
+                    <div class="panel-body" align="center" style="height: 320px;">
+
+                            <%--<h:dataTable>--%>
+                            <%--<h:outputText id="detailed" value="#{taskBoardBean.detailedNote}"/>--%>
+                            <%--<h:column>--%>
+<%--<h:form>--%>
+                        <%--<h:outputText value="description"/><br>--%>
+                        <h:inputTextarea rows="12" style="width: 90%" value="#{viewNoteBean.description}"/><br><br>
+<%--</h:form>--%>
+                            <%--<h:outputText value="name"/><br>--%>
+                            <%--<h:inputText id="name" value="#{viewNoteBean.name}"/><br><br>--%>
+                            <%--&lt;%&ndash;</h:column>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;<h:column>&ndash;%&gt;--%>
+
+                            <%--&lt;%&ndash;</h:column>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;<h:column>&ndash;%&gt;--%>
+                            <%--<h:outputText value="last modified"/><br>--%>
+                            <%--<h:inputText readonly="true" value="#{viewNoteBean.createDate}"/><br><br>--%>
+                            <%--&lt;%&ndash;</h:column>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;<h:column>&ndash;%&gt;--%>
+                            <%--<h:outputText value="state"/><br>--%>
+                            <%--<h:inputText readonly="true" value="#{viewNoteBean.state}"/><br><br>--%>
+                            <%--&lt;%&ndash;</h:column>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;<h:column>&ndash;%&gt;--%>
+                            <%--<h:outputText value="responcible"/><br>--%>
+                            <%--<h:inputText value="#{viewNoteBean.login}"/><br><br>--%>
+                            <%--&lt;%&ndash;</h:column>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;<h:column>&ndash;%&gt;--%>
+                            <%--<h:commandLink styleClass="pull-left notes" action="#{viewNoteBean.applyNote}" value="apply"/>--%>
+                            <%--&lt;%&ndash;</h:column>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;</h:dataTable>&ndash;%&gt;--%>
+
+                            <%--<h:form>--%>
+                            <%--<h:commandLink styleClass="pull-left notes" action="#{viewNoteBean.backToTaskBoard}" value="back"/>--%>
+                            <%--</h:form>--%>
+
+                                <%--</h:form>--%>
                     </div>
                 </div>
             </div>
         </div>
+            </h:form>
     </div>
     <footer><!--footer-->
         <div class="container">

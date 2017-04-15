@@ -17,7 +17,7 @@ public class NoteDaoImpl extends AbstractDao<Note, Integer> implements NoteDao {
     @SuppressWarnings("unchecked")
     public List<Note> byState(STATE state) {
         return performTransaction(() -> (List<Note>) getSession().createCriteria(Note.class)
-                .add(Restrictions.eq("state", state)).addOrder(Order.asc("createDate")).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list());
+                .add(Restrictions.eq("state", state)).addOrder(Order.desc("createDate")).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list());
 //        return (List<Note>) getSession().createCriteria(Note.class)
 //                .add(Restrictions.eq("state", state)).addOrder(Order.asc("createDate")).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
@@ -26,7 +26,7 @@ public class NoteDaoImpl extends AbstractDao<Note, Integer> implements NoteDao {
     @SuppressWarnings("unchecked")
     public List<Note> byStateSublist(STATE state, int amount, int  indexStart) {
         return performTransaction(() -> (List<Note>) getSession().createSQLQuery
-                ("SELECT * FROM notes WHERE state=:state ORDER BY create_date ASC LIMIT :amount OFFSET :indexStart ;")
+                ("SELECT * FROM notes WHERE state=:state ORDER BY create_date DESC LIMIT :amount OFFSET :indexStart ;")
                 .addEntity(Note.class).setParameter("state", state.ordinal()).setParameter("indexStart", indexStart).setParameter("amount", amount).list());
 //        return (List<Note>) getSession().createSQLQuery
 //                    ("SELECT * FROM notes WHERE state=:state ORDER BY create_date ASC LIMIT :amount OFFSET :indexStart ;")
