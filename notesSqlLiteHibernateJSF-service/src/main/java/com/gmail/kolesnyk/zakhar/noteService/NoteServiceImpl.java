@@ -9,7 +9,7 @@ import java.util.List;
 import static com.gmail.kolesnyk.zakhar.notes.STATE.*;
 
 public class NoteServiceImpl implements NoteService {
-    private static final int LENGTH_SUBLIST = 2;
+
     private NoteDao noteDao;
 
     public NoteServiceImpl() {
@@ -50,4 +50,6 @@ public class NoteServiceImpl implements NoteService {
     public void update(Note note) {
         noteDao.update(note);
     }
+
+
 }

@@ -3,7 +3,6 @@ package com.gmail.kolesnyk.zakhar.userService;
 import com.gmail.kolesnyk.zakhar.user.User;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 public interface UserService {
     User getUserByLoginOrEmailAndPassword(String loginOrEmail, String password) throws IllegalAccessException;
@@ -13,4 +12,6 @@ public interface UserService {
     User getUserById(int idUser);
 
     User getByLogin(String login);
+
+    void update(User user);
 }

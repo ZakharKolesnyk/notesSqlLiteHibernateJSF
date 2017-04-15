@@ -57,4 +57,9 @@ public class UserServiceImpl implements UserService {
     public User getByLogin(String login) {
         return userDao.byLogin(login.trim());
     }
+
+    @Override
+    public void update(User user){
+        userDao.update(user);
+    }
 }

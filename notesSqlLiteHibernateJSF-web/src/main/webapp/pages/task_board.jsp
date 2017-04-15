@@ -59,7 +59,7 @@
             <%--&lt;%&ndash;</h:dataTable>&ndash;%&gt;--%>
         <%--</h:form>--%>
     <%--</div>--%>
-    <div class="container">
+    <div class="container" style="width: 100%">
         <div class="row vertical-align"> <!--
                     ^--  Additional class -->
             <div class="col-xs-4">
@@ -78,6 +78,7 @@
                                 </h:column>
                                 <h:column>
                                     <h:commandLink styleClass="pull-left notes"
+                                                   action="#{taskBoardBean.viewUser(note.user)}"
                                                    value="[#{taskBoardBean.cutString(note.user.login)}]"/>
                                 </h:column>
                                 <h:column>
@@ -112,6 +113,7 @@
                                 </h:column>
                                 <h:column>
                                     <h:commandLink styleClass="pull-left notes"
+                                                   action="#{taskBoardBean.viewUser(note.user)}"
                                                    value="[#{taskBoardBean.cutString(note.user.login)}]">
                                         <%--<f:ajax></f:ajax>--%>
                                     </h:commandLink>
@@ -148,6 +150,7 @@
                                 </h:column>
                                 <h:column>
                                     <h:commandLink styleClass="pull-left notes"
+                                                   action="#{taskBoardBean.viewUser(note.user)}"
                                                    value="[#{taskBoardBean.cutString(note.user.login)}]"/>
                                 </h:column>
                                 <h:column>

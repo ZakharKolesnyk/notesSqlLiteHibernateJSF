@@ -12,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.Serializable;
 
 
@@ -47,12 +48,17 @@ public class AuthBean implements Serializable {
         this.user = user;
     }
 
-    public String logout() {
+    public void logout() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
         response.addCookie(new Cookie("JSESSIONID", null));
         facesContext.getExternalContext().invalidateSession();
-        return "index";
+        try {
+            response.sendRedirect("index.jsf");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        return "index";
     }
 
     public String getUsername() {

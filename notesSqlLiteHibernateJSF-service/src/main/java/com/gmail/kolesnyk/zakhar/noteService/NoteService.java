@@ -5,7 +5,7 @@ import com.gmail.kolesnyk.zakhar.notes.Note;
 import java.util.List;
 
 public interface NoteService {
-
+    int LENGTH_SUBLIST = 2;
 
     List<Note> performingNotes();
 

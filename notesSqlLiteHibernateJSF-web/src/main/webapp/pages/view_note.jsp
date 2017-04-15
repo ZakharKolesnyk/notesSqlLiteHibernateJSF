@@ -47,7 +47,7 @@
                             <%--<h:inputTextarea rows="5" cols="90" value="#{viewNoteBean.description}"/><br><br>--%>
 
                             <h:outputText value="name"/><br>
-                            <h:inputText id="name" value="#{viewNoteBean.name}"/><br><br>
+                            <h:inputText value="#{viewNoteBean.name}"/><br><br>
                             <%--</h:column>--%>
                             <%--<h:column>--%>
 

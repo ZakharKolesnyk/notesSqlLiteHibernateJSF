@@ -35,7 +35,7 @@ public class ViewNoteBean implements Serializable {
         init((Note) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("note"));
     }
 
-    public void init(Note note) {
+    private void init(Note note) {
         this.note = note;
         this.name = note.getName();
         this.description = note.getDescription();
