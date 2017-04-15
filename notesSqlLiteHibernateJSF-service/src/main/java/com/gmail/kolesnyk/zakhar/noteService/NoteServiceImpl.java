@@ -33,17 +33,17 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public List<Note> performingNotesSublist() {
-        return noteDao.byStateSublist(PERFORMING, LENGTH_SUBLIST, 0);
+        return noteDao.byStateSublist(PERFORMING, SIZE_SUBLIST, 0);
     }
 
     @Override
     public List<Note> waitingNotesSublist() {
-        return noteDao.byStateSublist(WAITING, LENGTH_SUBLIST, 0);
+        return noteDao.byStateSublist(WAITING, SIZE_SUBLIST, 0);
     }
 
     @Override
     public List<Note> doneNotesSublist() {
-        return noteDao.byStateSublist(DONE, LENGTH_SUBLIST, 0);
+        return noteDao.byStateSublist(DONE, SIZE_SUBLIST, 0);
     }
 
     @Override
