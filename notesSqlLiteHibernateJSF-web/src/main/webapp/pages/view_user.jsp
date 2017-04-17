@@ -73,7 +73,7 @@
                                                    action="#{viewUserBean.viewNote(note)}"/>
                                 </h:column>
                                 <h:column>
-                                    <h:selectOneMenu disabled="#{not authBean.user.hasRole('LEADER')}"
+                                    <h:selectOneMenu disabled="#{not (authBean.user.hasRole('LEADER') || authBean.user.login.equals(viewUserBean.login))}"
                                                      styleClass="notes" value="#{note.state}" onchange="submit()"
                                                      valueChangeListener="#{viewUserBean.changeListener}">
                                         <f:attribute name="note" value="#{note}"/>
@@ -101,7 +101,7 @@
                                                    action="#{viewUserBean.viewNote(note)}"/>
                                 </h:column>
                                 <h:column>
-                                    <h:selectOneMenu disabled="#{not authBean.user.hasRole('LEADER')}"
+                                    <h:selectOneMenu disabled="#{not (authBean.user.hasRole('LEADER') || authBean.user.login.equals(viewUserBean.login))}"
                                                      styleClass="notes" value="#{note.state}" onchange="submit()"
                                                      valueChangeListener="#{viewUserBean.changeListener}">
                                         <f:attribute name="note" value="#{note}"/>
@@ -129,7 +129,7 @@
                                                    action="#{viewUserBean.viewNote(note)}"/>
                                 </h:column>
                                 <h:column>
-                                    <h:selectOneMenu disabled="#{not authBean.user.hasRole('LEADER')}"
+                                    <h:selectOneMenu disabled="#{not (authBean.user.hasRole('LEADER') || authBean.user.login.equals(viewUserBean.login))}"
                                                      styleClass="notes" value="#{note.state}" onchange="submit()"
                                                      valueChangeListener="#{viewUserBean.changeListener}">
                                         <f:attribute name="note" value="#{note}"/>

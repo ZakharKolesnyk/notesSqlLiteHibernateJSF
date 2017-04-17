@@ -39,7 +39,7 @@
                     <div class="panel-body" align="center" style="height: 320px;">
 
                             <h:outputText value="name"/><br>
-                            <h:inputText value="#{viewNoteBean.name}"/><br><br>
+                            <h:inputText readonly="#{not authBean.user.hasRole('LEADER')}" value="#{viewNoteBean.name}"/><br><br>
 
                             <h:outputText value="last modified"/><br>
                             <h:inputText readonly="true" value="#{viewNoteBean.createDate}"/><br><br>
@@ -48,8 +48,8 @@
                             <h:inputText readonly="true" value="#{viewNoteBean.state}"/><br><br>
 
                             <h:outputText value="responcible"/><br>
-                            <h:inputText value="#{viewNoteBean.login}"/><br><br>
-                                <h:commandLink styleClass="pull-left notes" action="#{viewNoteBean.applyNote}"
+                            <h:inputText readonly="#{not authBean.user.hasRole('LEADER')}" value="#{viewNoteBean.login}"/><br><br>
+                                <h:commandLink disabled="#{not authBean.user.hasRole('LEADER')}" styleClass="pull-left notes" action="#{viewNoteBean.applyNote}"
                                                value="apply"/>
                                 <h:commandLink styleClass="pull-right notes" action="#{viewNoteBean.backToTaskBoard}"
                                                value="back"/>
@@ -63,7 +63,7 @@
                     <div class="panel-heading"><h4>DESCRIPTION</h4>
                     </div>
                     <div class="panel-body" align="center" style="height: 320px;">
-                        <h:inputTextarea rows="12" style="width: 90%" value="#{viewNoteBean.description}"/><br><br>
+                        <h:inputTextarea readonly="#{not authBean.user.hasRole('LEADER')}" rows="12" style="width: 90%" value="#{viewNoteBean.description}"/><br><br>
                     </div>
                 </div>
             </div>
