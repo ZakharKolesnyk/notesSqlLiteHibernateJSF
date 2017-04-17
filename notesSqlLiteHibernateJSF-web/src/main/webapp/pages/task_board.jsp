@@ -33,12 +33,12 @@
             <div class="col-xs-4">
                 <div class="panel panel-default">
                     <h:form>
-                        <div class="panel-heading"><h:commandLink action="#{taskBoardBean.fullWaitingNotesList}"
+                        <div class="panel-heading"><h:commandLink action="#{taskBoardBean.fullAssignedNotesList}"
                                                                   styleClass="pull-right">View all</h:commandLink> <h4>
-                            WAITING NOTES</h4>
+                            ASSIGNED NOTES</h4>
                         </div>
                         <div class="panel-body">
-                            <h:dataTable var="note" value="#{taskBoardBean.waitingNotes}">
+                            <h:dataTable var="note" value="#{taskBoardBean.assignedNotes}">
                                 <h:column>
                                     <h:commandLink styleClass="pull-left notes"
                                                    value="#{taskBoardBean.cutString(note.name)}"
@@ -54,7 +54,7 @@
                                                      styleClass="notes" value="#{note.state}" onchange="submit()"
                                                      valueChangeListener="#{taskBoardBean.changeListener}">
                                         <f:attribute name="note" value="#{note}"/>
-                                        <f:selectItem itemValue="WAITING" itemLabel="WAITING"/>
+                                        <f:selectItem itemValue="ASSIGNED" itemLabel="ASSIGNED"/>
                                         <f:selectItem itemValue="PERFORMING" itemLabel="PERFORMING"/>
                                         <f:selectItem itemValue="DONE" itemLabel="DONE"/>
                                     </h:selectOneMenu>
@@ -90,7 +90,7 @@
                                                      valueChangeListener="#{taskBoardBean.changeListener}">
                                         <f:attribute name="note" value="#{note}"/>
                                         <f:selectItem itemValue="PERFORMING" itemLabel="PERFORMING"/>
-                                        <f:selectItem itemValue="WAITING" itemLabel="WAITING"/>
+                                        <f:selectItem itemValue="ASSIGNED" itemLabel="ASSIGNED"/>
                                         <f:selectItem itemValue="DONE" itemLabel="DONE"/>
                                     </h:selectOneMenu>
                                 </h:column>
@@ -124,7 +124,7 @@
                                                      valueChangeListener="#{taskBoardBean.changeListener}">
                                         <f:attribute name="note" value="#{note}"/>
                                         <f:selectItem itemValue="DONE" itemLabel="DONE"/>
-                                        <f:selectItem itemValue="WAITING" itemLabel="WAITING"/>
+                                        <f:selectItem itemValue="ASSIGNED" itemLabel="ASSIGNED"/>
                                         <f:selectItem itemValue="PERFORMING" itemLabel="PERFORMING"/>
                                     </h:selectOneMenu>
                                 </h:column>

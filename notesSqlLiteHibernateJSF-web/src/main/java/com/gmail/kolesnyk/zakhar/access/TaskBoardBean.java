@@ -26,7 +26,7 @@ public class TaskBoardBean implements Serializable {
 
     private ViewUtil viewUtil;
     private NoteService noteService;
-    private List<Note> waitingNotes;
+    private List<Note> assignedNotes;
     private List<Note> performingNotes;
     private List<Note> doneNotes;
 
@@ -35,7 +35,7 @@ public class TaskBoardBean implements Serializable {
         viewUtil = new ViewUtil();
         try {
             performingNotes = noteService.performingNotesSublist();
-            waitingNotes = noteService.waitingNotesSublist();
+            assignedNotes = noteService.assignedNotesSublist();
             doneNotes = noteService.doneNotesSublist();
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +64,7 @@ public class TaskBoardBean implements Serializable {
      * @param event event form JSF UI
      */
     public void changeListener(ValueChangeEvent event) {
-        viewUtil.moveNote(event, waitingNotes, performingNotes, doneNotes);
+        viewUtil.moveNote(event, assignedNotes, performingNotes, doneNotes);
     }
 
     /**
@@ -98,9 +98,9 @@ public class TaskBoardBean implements Serializable {
         return viewUtil.viewNote(note);
     }
 
-    public void fullWaitingNotesList() {
+    public void fullAssignedNotesList() {
         try {
-            waitingNotes = noteService.waitingNotes();
+            assignedNotes = noteService.assignedNotes();
         } catch (Exception e) {
             e.printStackTrace();
             viewUtil.toErrorPage();
@@ -125,13 +125,13 @@ public class TaskBoardBean implements Serializable {
         }
     }
 
-    public List<Note> getWaitingNotes() {
-        viewUtil.sortBeforeView(waitingNotes);
-        return waitingNotes;
+    public List<Note> getAssignedNotes() {
+        viewUtil.sortBeforeView(assignedNotes);
+        return assignedNotes;
     }
 
-    public void setWaitingNotes(List<Note> waitingNotes) {
-        this.waitingNotes = waitingNotes;
+    public void setAssignedNotes(List<Note> assignedNotes) {
+        this.assignedNotes = assignedNotes;
     }
 
     public List<Note> getPerformingNotes() {

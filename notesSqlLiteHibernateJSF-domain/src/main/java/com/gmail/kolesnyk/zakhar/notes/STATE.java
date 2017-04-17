@@ -10,9 +10,9 @@ package com.gmail.kolesnyk.zakhar.notes;
 public enum STATE {
 
     /**
-     * waiting state of {@link Note}
+     * assigned state of {@link Note}
      */
-    WAITING,
+    ASSIGNED,
 
     /**
      * performing state of {@link Note}

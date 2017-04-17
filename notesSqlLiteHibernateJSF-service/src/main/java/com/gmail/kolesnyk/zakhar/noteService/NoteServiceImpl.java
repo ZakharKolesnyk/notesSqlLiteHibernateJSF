@@ -22,8 +22,8 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public List<Note> waitingNotes() {
-        return noteDao.byState(WAITING);
+    public List<Note> assignedNotes() {
+        return noteDao.byState(ASSIGNED);
     }
 
     @Override
@@ -37,8 +37,8 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public List<Note> waitingNotesSublist() {
-        return noteDao.byStateSublist(WAITING, SIZE_SUBLIST, 0);
+    public List<Note> assignedNotesSublist() {
+        return noteDao.byStateSublist(ASSIGNED, SIZE_SUBLIST, 0);
     }
 
     @Override

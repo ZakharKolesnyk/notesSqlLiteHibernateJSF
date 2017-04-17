@@ -53,7 +53,7 @@ public class ViewUtil {
                 pNotes.remove(note);
                 break;
             }
-            case WAITING: {
+            case ASSIGNED: {
                 wNotes.remove(note);
                 break;
             }
@@ -68,7 +68,7 @@ public class ViewUtil {
                 pNotes.add(note);
                 break;
             }
-            case WAITING: {
+            case ASSIGNED: {
                 wNotes.add(note);
                 break;
             }

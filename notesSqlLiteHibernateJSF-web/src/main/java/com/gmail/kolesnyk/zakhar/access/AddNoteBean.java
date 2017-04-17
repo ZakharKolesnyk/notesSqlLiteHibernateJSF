@@ -12,7 +12,7 @@ import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 import java.util.Date;
 
-import static com.gmail.kolesnyk.zakhar.notes.STATE.WAITING;
+import static com.gmail.kolesnyk.zakhar.notes.STATE.ASSIGNED;
 
 /**
  * The {@code AddNoteBean} JSF Bean using for creating and saving to database new {@link Note}
@@ -45,7 +45,7 @@ public class AddNoteBean implements Serializable {
             Note note = new Note();
             note.setName(name);
             note.setDescription(description);
-            note.setState(WAITING);
+            note.setState(ASSIGNED);
             note.setCreateDate(new Date());
             note.setUser(userService.getByLogin(employee));
             noteService.save(note);

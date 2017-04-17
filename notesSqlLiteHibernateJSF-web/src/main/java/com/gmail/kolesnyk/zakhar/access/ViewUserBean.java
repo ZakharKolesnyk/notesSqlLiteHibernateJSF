@@ -37,7 +37,7 @@ public class ViewUserBean implements Serializable {
     private String login;
     private String authority;
     private Set<Note> fullSet;
-    private List<Note> waitingNotes;
+    private List<Note> assignedNotes;
     private List<Note> performingNotes;
     private List<Note> doneNotes;
 
@@ -45,7 +45,7 @@ public class ViewUserBean implements Serializable {
         noteService = new NoteServiceImpl();
         userService = new UserServiceImpl();
         viewUtil = new ViewUtil();
-        waitingNotes = new ArrayList<>();
+        assignedNotes = new ArrayList<>();
         performingNotes = new ArrayList<>();
         doneNotes = new ArrayList<>();
         init((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user"));
@@ -62,8 +62,8 @@ public class ViewUserBean implements Serializable {
             fullSet = user.getNotes();
             fullSet.stream().sorted((o1, o2) -> o2.getCreateDate().compareTo(o1.getCreateDate())).forEach(note -> {
                 switch (note.getState()) {
-                    case WAITING: {
-                        waitingNotes.add(note);
+                    case ASSIGNED: {
+                        assignedNotes.add(note);
                         break;
                     }
                     case PERFORMING: {
@@ -112,7 +112,7 @@ public class ViewUserBean implements Serializable {
     }
 
     public void changeListener(ValueChangeEvent event) {
-        viewUtil.moveNote(event, waitingNotes, performingNotes, doneNotes);
+        viewUtil.moveNote(event, assignedNotes, performingNotes, doneNotes);
     }
 
     public String getFirstName() {
@@ -155,9 +155,9 @@ public class ViewUserBean implements Serializable {
         this.authority = authority;
     }
 
-    public List<Note> getWaitingNotes() {
-        viewUtil.sortBeforeView(waitingNotes);
-        return waitingNotes;
+    public List<Note> getAssignedNotes() {
+        viewUtil.sortBeforeView(assignedNotes);
+        return assignedNotes;
     }
 
     public List<Note> getPerformingNotes() {

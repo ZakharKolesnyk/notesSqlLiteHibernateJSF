@@ -63,10 +63,10 @@
             <div class="col-xs-3">
                 <div class="panel panel-default">
                     <h:form>
-                        <div class="panel-heading"><h4>WAITING NOTES</h4>
+                        <div class="panel-heading"><h4>ASSIGNED NOTES</h4>
                         </div>
                         <div class="panel-body">
-                            <h:dataTable var="note" value="#{viewUserBean.waitingNotes}">
+                            <h:dataTable var="note" value="#{viewUserBean.assignedNotes}">
                                 <h:column>
                                     <h:commandLink styleClass="pull-left notes"
                                                    value="#{viewUserBean.cutString(note.name)}"
@@ -78,7 +78,7 @@
                                                      valueChangeListener="#{viewUserBean.changeListener}">
                                         <f:attribute name="note" value="#{note}"/>
                                         <f:selectItem itemValue="" itemLabel=""/>
-                                        <f:selectItem itemValue="WAITING" itemLabel="WAITING"/>
+                                        <f:selectItem itemValue="ASSIGNED" itemLabel="ASSIGNED"/>
                                         <f:selectItem itemValue="PERFORMING" itemLabel="PERFORMING"/>
                                         <f:selectItem itemValue="DONE" itemLabel="DONE"/>
                                     </h:selectOneMenu>
@@ -107,7 +107,7 @@
                                         <f:attribute name="note" value="#{note}"/>
                                         <f:selectItem itemValue="" itemLabel=""/>
                                         <f:selectItem itemValue="PERFORMING" itemLabel="PERFORMING"/>
-                                        <f:selectItem itemValue="WAITING" itemLabel="WAITING"/>
+                                        <f:selectItem itemValue="ASSIGNED" itemLabel="ASSIGNED"/>
                                         <f:selectItem itemValue="DONE" itemLabel="DONE"/>
                                     </h:selectOneMenu>
                                 </h:column>
@@ -135,7 +135,7 @@
                                         <f:attribute name="note" value="#{note}"/>
                                         <f:selectItem itemValue="" itemLabel=""/>
                                         <f:selectItem itemValue="DONE" itemLabel="DONE"/>
-                                        <f:selectItem itemValue="WAITING" itemLabel="WAITING"/>
+                                        <f:selectItem itemValue="ASSIGNED" itemLabel="ASSIGNED"/>
                                         <f:selectItem itemValue="PERFORMING" itemLabel="PERFORMING"/>
                                     </h:selectOneMenu>
                                 </h:column>

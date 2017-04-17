@@ -18,11 +18,11 @@ public interface NoteService {
     int SIZE_SUBLIST = 2;
 
     /**
-     * method allow to get list of all notes what have state {@link com.gmail.kolesnyk.zakhar.notes.STATE#WAITING}
+     * method allow to get list of all notes what have state {@link com.gmail.kolesnyk.zakhar.notes.STATE#ASSIGNED}
      *
      * @return {@link List<Note>}
      */
-    List<Note> waitingNotes();
+    List<Note> assignedNotes();
 
     /**
      * method allow to get list of all notes what have state {@link com.gmail.kolesnyk.zakhar.notes.STATE#PERFORMING}
@@ -39,12 +39,12 @@ public interface NoteService {
     List<Note> doneNotes();
 
     /**
-     * method allow to get sublist of all notes what have state {@link com.gmail.kolesnyk.zakhar.notes.STATE#WAITING}
+     * method allow to get sublist of all notes what have state {@link com.gmail.kolesnyk.zakhar.notes.STATE#ASSIGNED}
      * with size by {@link #SIZE_SUBLIST}
      *
      * @return {@link List<Note>}
      */
-    List<Note> waitingNotesSublist();
+    List<Note> assignedNotesSublist();
 
     /**
      * method allow to get sublist of all notes what have state {@link com.gmail.kolesnyk.zakhar.notes.STATE#PERFORMING}
