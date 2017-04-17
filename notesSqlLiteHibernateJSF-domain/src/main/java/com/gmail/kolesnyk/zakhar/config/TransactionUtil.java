@@ -38,7 +38,7 @@ public class TransactionUtil {
     }
 
     /**
-     * return initialized session with opened transaction
+     * @return initialized session with opened transaction
      */
     public static Session getSession() {
         initSession();

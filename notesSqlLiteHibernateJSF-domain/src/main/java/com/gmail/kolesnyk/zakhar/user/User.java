@@ -7,6 +7,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
+/**
+ * The {@code User} JPA entity what mapped on table "users"
+ *
+ * @author Kolesnyk Zakhar
+ * @see com.gmail.kolesnyk.zakhar.user.UserDao
+ * @since JDK1.8
+ */
 @Entity()
 @Table(name = "users")
 public class User implements Serializable {

@@ -4,7 +4,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-public class HibernateUtil {
+/**
+ * The {@code TransactionUtil} singleton class using for building hibernate session factory
+ *
+ * @author Kolesnyk Zakhar
+ * @see com.gmail.kolesnyk.zakhar.config.TransactionUtil
+ * @since JDK1.8
+ */
+class HibernateUtil {
     private static SessionFactory sessionFactory = null;
 
     static {
@@ -14,7 +21,7 @@ public class HibernateUtil {
         sessionFactory = cfg.buildSessionFactory(builder.build());
     }
 
-    public static SessionFactory getSessionFactory() {
+    static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 }

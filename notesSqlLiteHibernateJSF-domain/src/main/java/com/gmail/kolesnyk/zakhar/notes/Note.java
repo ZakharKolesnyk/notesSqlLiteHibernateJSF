@@ -7,6 +7,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * The {@code Note} JPA entity what mapped on table "notes"
+ *
+ * @author Kolesnyk Zakhar
+ * @see com.gmail.kolesnyk.zakhar.notes.NoteDao
+ * @since JDK1.8
+ */
 @Entity
 @Table(name = "notes")
 public class Note implements Serializable {
