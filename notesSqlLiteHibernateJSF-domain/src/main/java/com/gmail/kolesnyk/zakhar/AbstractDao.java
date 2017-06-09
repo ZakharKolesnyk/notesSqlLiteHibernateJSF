@@ -9,7 +9,7 @@ import java.util.List;
 import static com.gmail.kolesnyk.zakhar.config.TransactionUtil.*;
 
 /**
- * The {@code UserDao} implements main methods that required for ORM relations
+ * The {@code AbstractDao} implements main methods that required for ORM relations
  *
  * @author Kolesnyk Zakhar
  * @see com.gmail.kolesnyk.zakhar.BaseDao

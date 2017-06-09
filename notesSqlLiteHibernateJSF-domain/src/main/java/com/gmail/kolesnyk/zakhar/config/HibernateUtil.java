@@ -5,7 +5,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 /**
- * The {@code TransactionUtil} singleton class using for building hibernate session factory
+ * The {@code HibernateUtil} singleton class using for building hibernate session factory
  *
  * @author Kolesnyk Zakhar
  * @see com.gmail.kolesnyk.zakhar.config.TransactionUtil
